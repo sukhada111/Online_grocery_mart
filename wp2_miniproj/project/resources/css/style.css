@@ -18,6 +18,12 @@ body{
     font-weight: 300;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    overflow: auto;
+
+}
+body{
+    overflow-y: hidden;
+
 }
 
 .clearfix{
@@ -85,7 +91,7 @@ h3{
 h2:after{
     display: block;
     height: 2px;
-    background-color: #69a6ce;
+    background-color:#0097e6;
     content: "";
     width: 100px;
     margin: 0 auto;
@@ -113,7 +119,7 @@ h2:after{
 .icon-big{
     font-size: 350%;
     display: block;
-    color: #e67e22;
+    color: #0097e6;
     margin-bottom: 10px;
 }
 
@@ -121,7 +127,7 @@ h2:after{
     display: inline-block;
     width: 30px;
     text-align: center;
-    color: #69a6ce;
+    color: #0097e6;
     font-size: 120%;
     margin-right: 10px;
 /*secrets to align text and icons*/
@@ -138,10 +144,10 @@ h2:after{
 /*----------------------*/
 a:link,
 a:visited{
-    color: #69a6ce;
+    color:#0097e6;
     text-decoration: none;
     padding-bottom: 1px;
-    border-bottom: 1px solid #69a6ce;
+    border-bottom: 1px solid #0097e6;
     transition: border-bottom 0.2s, color 0.2s;
 
 }
@@ -222,7 +228,7 @@ header{
 
 .main-nav li a:hover,
 .main-nav li a:active{
-    border-bottom: 2px solid #69a6ce;
+    border-bottom: 2px solid #0097e6;
 }
 
 /* sticky navigation */
@@ -232,7 +238,7 @@ header{
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.98);
+    background-color: rgba(211, 209, 209, 0.96);
     box-shadow: 0 2px 2px #efefef;
     z-index: 9999;
 }
@@ -277,8 +283,8 @@ input[type=submit] {
 .btn-full:link,
 .btn-full:visited,
 input[type=submit] {
-    background-color: #3e8dc0;
-    border: 1px solid #3e8dc0;
+    background-color: #0097e6;
+    border: 1px solid #0097e6;
     color: #fff;
     margin-right: 15px;
 
@@ -287,8 +293,8 @@ input[type=submit] {
 
 .btn-ghost:link,
 .btn-ghost:visited {
-    border: 1px solid #bfd9ea;
-    color: #bfd9ea !important;
+    border: 1px solid #0097e6;
+    color: #0097e6 !important;
 }
 
 .btn:hover,
@@ -347,6 +353,50 @@ input[type=checkbox]{
 
 *:focus{
     outline: none;
+}
+
+/*----------------------*/
+/*TESTIMONIALS*/
+/*----------------------*/
+
+.section-testimonials{
+    background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), url("img/testimonialbg.jpg") ;
+    background-size: cover;
+    color: #fff;
+    background-attachment: fixed;
+
+}
+
+blockquote{
+    padding: 2%;
+    font-style: italic;
+    line-height: 145%;
+    position: relative;
+    margin-top: 40px;
+}
+
+blockquote:before{
+    content: "\201C";
+    font-size: 500%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -5px;
+}
+
+cite{
+    font-size: 90%;
+    margin-top: 25px;
+    display: block;
+}
+
+
+
+cite img{
+    height: 45px;
+    border-radius: 50%;
+    margin-right:10px ;
+    vertical-align: middle;
 }
 
 

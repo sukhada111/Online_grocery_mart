@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omnifood</title>
+    <title>Freshmart</title>
 
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/queries.css">
@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/grid.css">
+
 
   
 </head>
@@ -37,21 +38,21 @@
 
         <div class="hero-text-box">
 
-            <h1>Compare and Find <br> your groceries at the best price.</h1>
+            <h1>Compare and Find <br> your groceries at the best price. </h1>
             <a class="btn btn-full" href="#">Order Now</a>
             <a class="btn btn-ghost" href="#">Know More</a>
         </div>
     </header>
     <!-- FEATURES SECTION  -->
 
-    <section class="features js--section-features">
+    <section class="features js--section-features js--wp-1">
         
         <div class="row">
 
-            <h2>Get food fast &mdash; not fast food.</h2>
+            <h2>Never overpay for groceries again.</h2>
             <p class="long-copy">
 
-                Hello, we’re Omnifood, your new premium food delivery service. We know you’re always busy. No time for cooking. So let us take care of that, we’re really good at it, we promise!
+                Hello, we’re Freshmart, your new premium grocery delivery service. We know you’re always busy. Freshmart gives shoppers the power to make their best decision, every time, every trip.
 
             </p>
         </div>
@@ -59,9 +60,9 @@
         <div class="row">
             <div class="col span-1-of-4 box">
                 <i class="ion-ios-infinite-outline icon-big"></i>
-                <h3>Up to 365 days/year</h3>
+                <h3>All year round</h3>
                 <p>
-                    Never cook again! We really mean that. Our subscription plans include up to 365 days/year coverage. You can also choose to order more flexibly if that's your style.
+                    Never waste time again! We work towards saving your time and money on groceries and everyday purchases.
 
                 </p>
             
@@ -69,18 +70,18 @@
 
             <div class="col span-1-of-4 box">
                 <i class="ion-ios-stopwatch-outline icon-big"></i>
-                <h3>Ready in 20 minutes</h3>
+                <h3>Delivery in 2 days</h3>
                 <p>
-                    You're only twenty minutes away from your delicious and super healthy meals delivered right to your home. We work with the best chefs in each town to ensure that you're 100% happy.
+                    You're only 2 days away from your fresh groceries delivered right to your home. We work with only the best to ensure that you're a 100% happy.
                 </p>
             
             </div>
 
             <div class="col span-1-of-4 box">
                 <i class="ion-ios-nutrition-outline icon-big"></i>
-                <h3>100% organic</h3>
+                <h3>100% fresh</h3>
                 <p>
-                    All our vegetables are fresh, organic and local. Animals are raised without added hormones or antibiotics. Good for your health, the environment, and it also tastes better!
+                    All our products are fresh, organic and local. Animals are raised without added hormones or antibiotics. Good for your health, the environment, and it also tastes better!
 
                 </p>
             
@@ -90,11 +91,54 @@
                 <i class="ion-ios-cart-outline icon-big"></i>
                 <h3> Order anything</h3>
                 <p>
-                    We don't limit your creativity, which means you can order whatever you feel like. You can also choose from our menu containing over 100 delicious meals. It's up to you! -->
+                    We don't limit ourselves, which means you can order whatever you feel like, at the best prices.  Freshmart lets you instantly see which stores have your favourite products and what the price is at each store.
 
                 </p>
             
             </div>
+        </div>
+
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section-testimonials">
+
+        <div class="row">
+            <h2>Our customers can't live without us</h2>
+        </div>
+
+        <div class="row">
+            <div class="col span-1-of-3">
+                <blockquote>
+                    Freshmart is just awesome! I just launched a startup which leaves me with no time for visiting grocery stores, so Freshmart is a life-saver. Now that I got used to it, I don't feel the need to go to the grocery store anymore!
+                    
+                    <cite>
+                        <img src="resources/img/customer-1.jpg" alt=""> 
+                        Alberto Duncan
+                    </cite>
+                </blockquote>
+            </div>
+            <div class="col span-1-of-3">
+                <blockquote>
+                    Saving money, quick service, access to the best stores and delivered right to my home. We have lots of Online grocery marts here in Mumbai, but no one comes even close to Freshmart. Me and my family are so in love!
+                    
+                    <cite>
+                        <img src="resources/img/customer-2.jpg" alt=""> 
+                        Joana Silva
+                    </cite>
+                </blockquote>
+            </div>
+            <div class="col span-1-of-3">
+                <blockquote>
+                    I was looking for a quick and easy Online Grocery Store service in Mumbai. I tried a lot of them and ended up with Freshmart. One of the best e-stores I have seen. Keep up the great work!
+                    
+                    <cite>
+                        <img src="resources/img/customer-3.jpg" alt=""> 
+                        Milton Chapman
+                    </cite>
+                </blockquote>
+            </div>
+
         </div>
 
     </section>
