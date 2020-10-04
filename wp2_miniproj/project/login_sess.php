@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $unameErr=$passErr="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
       
@@ -29,7 +29,19 @@ function input_data($data) {
     return $data;  
   }  
 
-   
+  if(isset($_POST['submit'])) {  
+    
+    if($unameErr == "" && $passErr == "") {  
+       
+        // setcookie('username',$uname);
+        // setcookie('password',$password);
+        $_SESSION['username']=$uname;
+        $_SESSION['password']=$password;
+        header('Location:home.php');
+    
+       
+    }
+}  
     
 ?>
 

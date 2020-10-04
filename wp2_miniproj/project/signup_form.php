@@ -1,25 +1,66 @@
 <?php
 
-$unameErr=$passErr="";
+$uname = $pass = $check = $email = $address = "";
+$unameErr = $passErr = $checkErr = $emailErr = $addressErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  
       
-    if (empty($_POST["username"])) {  
+    if (empty($_POST["uname"])) {  
         $unameErr = "Username is required";  
    } else {  
-       $uname = input_data($_POST["username"]);  
+       $uname = input_data($_POST["uname"]);  
            
    } 
 
-    if (empty($_POST["pwd"])) {  
+    if (empty($_POST["pass"])) {  
         $passErr = "Password is required";  
    } else {  
-       $password = input_data($_POST["pwd"]);  
+       $pass = input_data($_POST["pass"]);  
            // check if name only contains letters and whitespace  
-           if (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/",$password)) {  
-               $passErr = "Password must contain atleast one number, one letter and should be 8-12 characters long!";  
-           }  
-   } 
+        //    if (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/",$password)) {  
+        //        $passErr = "Password must contain atleast one number, one letter and should be 8-12 characters long!";  
+        //    }
+        if (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/",$pass)) {  
+            $passErr = "Password must contain atleast one number, one letter and should be 8-12 characters long!";  
+        }   
+   }
+   
+//    if (empty($_POST["check"])) 
+//    {  
+//     $checkErr = "Please confirm password!";  
+//     } else if ($_POST["pass"] != $_POST["check"]) {
+//         $checkErr = "Same password to be entered!"; 
+//      }
+     
 
+
+    // if ($_POST["password"] === $_POST["confirm_password"]) {
+    //     // success!
+    //  }
+    //  else {
+    //     $checkErr = "Same password to be entered!";  
+    //  }
+
+
+    if (empty($_POST["email"])) {  
+            $emailErr = "Email is required";  
+    } else {  
+            $email = $_POST["email"];  
+            // check that the e-mail address is well-formed  
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  
+                $emailErr = "Invalid email format";  
+            }  
+    } 
+
+
+    if (empty($_POST["address"])) {  
+        $addressErr = "Address is required";  
+    } else {  
+    $address = input_data($_POST["address"]);  
+        
+    } 
+
+
+    
    
 }
 function input_data($data) {  
@@ -29,7 +70,7 @@ function input_data($data) {
     return $data;  
   }  
 
-   
+
     
 ?>
 
@@ -50,9 +91,6 @@ function input_data($data) {
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/grid.css">
     <style>
-        body{
-            color:#cccccc;
-        }
         header{
             height: 70%;
             background-image: linear-gradient(rgba(0,0,0,0.7), 
@@ -76,7 +114,7 @@ a{color:inherit;text-decoration:none}
     width:100%;
     margin:auto;
     max-width:525px;
-    min-height:670px;
+    min-height:1070px;
     position:relative;
     font:600 16px/18px 'Open Sans',sans-serif;
     background:url("resources/img/veg5.jpg") no-repeat center;
@@ -222,6 +260,7 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
     text-align:center;
+    color: rgba(255,255,255,.2);
 }
     </style>
   
@@ -248,7 +287,7 @@ a{color:inherit;text-decoration:none}
         </nav>
 
         <div class="hero-text-box">
-            <h1>Login Form</h1>
+            <h1>Sign Up Form</h1>
         </div>
     </header>
     <section class="section-form">
@@ -256,13 +295,13 @@ a{color:inherit;text-decoration:none}
         <?php
         if(isset($_POST['submit'])) {  
     
-            if($unameErr == "" && $passErr == "") {  
+            if($unameErr == "" && $passErr == "" && $checkErr == "" && $emailErr == "" && $addressErr == "") {  
                
                 ?>
                 <div class="row" align="center">
                     <h3 style="color:black">
                     <?php
-                echo "You have successfully logged in!</h3>";
+                echo "Welcome to FreshMart!</h3>";
                 ?>
                 </h3>
                 </div>
@@ -291,7 +330,7 @@ a{color:inherit;text-decoration:none}
             {
                 ?>
         <div class="row">
-            <h2 style="color:black">Sign in to find fresh groceries at the best price!</h2>
+            <h2 style="color:black">Sign Up to avail the best deals on fresh groceries!</h2>
         </div>
         <br>
         <?php
@@ -305,13 +344,24 @@ a{color:inherit;text-decoration:none}
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
            
             <div class="login-form">
-                <div class="sign-in-htm">
+                <!-- <div class="sign-in-htm">
+                    <br><br>
+                   <h3 style="color:white">Already member?</h3><br>
+                   <h3 style="color:white">Click to Login!</h3>
+                   <br>
+                   <div class="group">
+                        <input type="submit" class="button si" value="Sign In">
+                </div> -->
+
+
+
+                <div class="sign-up-htm">
                     <div class="group">
                     <br>
-                        <label for="user" class="label">Username</label>
-                        <input id="user" type="text" class="input" name="username">
+                        <label for="uname" class="label">Username</label>
+                        <input id="uname" type="text" class="input" name="uname">
                         <br>
-                        <?php if(isset($_POST["username"]))
+                        <?php if(isset($_POST["uname"]))
                         {
                             ?>
                         <span class="error"><?php echo $unameErr;?> </span>
@@ -322,10 +372,10 @@ a{color:inherit;text-decoration:none}
                     <br>
                     </div>
                     <div class="group">
-                        <label for="pwd" class="label">Password</label>
-                        <input id="pass" name="pwd" type="password" class="input" data-type="password">
+                        <label for="pass" class="label">Password</label>
+                        <input id="pass" name="pass" type="password" class="input" data-type="password">
                         <br>
-                        <?php if(isset($_POST["pwd"]))
+                        <?php if(isset($_POST["pass"]))
                         {
                             ?>       
                         <span class="error"><?php echo $passErr; ?> </span>  
@@ -334,32 +384,86 @@ a{color:inherit;text-decoration:none}
                         ?>
                     <br>
                     </div>
+                    <div class="group">
+                    <br>
+                        <label for="check" class="label">Confirm Password</label>
+                        <input id="check" type="password" class="input" name="check">
+                        <br>
+                        <?php if(isset($_POST["check"]))
+                        {
+                            ?>
+                        <span class="error"><?php echo $checkErr;?> </span>
+                        <br>
+                        <?php
+                        }
+                        ?>
+                    <br>
+                    </div>
+                    <div class="group">
+                    <br>
+                        <label for="email" class="label">Email Address</label>
+                        <input id="email" type="text" class="input" name="email">
+                        <br>
+                        <?php if(isset($_POST["email"]))
+                        {
+                            ?>
+                        <span class="error"><?php echo $emailErr;?> </span>
+                        <br>
+                        <?php
+                        }
+                        ?>
+                    <br>
+                    </div>
+                    <div class="group">
+                    <br>
+                        <label for="address" class="label">Address</label>
+                        <input id="address" type="text" class="input" name="address">
+                        <br>
+                        <?php if(isset($_POST["address"]))
+                        {
+                            ?>
+                        <span class="error"><?php echo $addressErr;?> </span>
+                        <br>
+                        <?php
+                        }
+                        ?>
+                    <br>
+                    </div>
                     <br>
                     <div class="group">
                         <input id="check" name="agree" type="checkbox" class="check" checked>
-                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                        <label for="check"><span class="icon"></span> Agree to Terms and Conditions</label>
                     <br>
                      
                     </div>
                     <div class="group">
-                        <input type="submit" name="submit" class="button" value="Sign In">
+                        <input type="submit" name="submit" class="button" value="Sign Up">
                     </div>
                     
                     <div class="hr"></div>
                     <div class="foot-lnk">
-                        <a href="#forgot"><h5>Forgot Password?</h5></a>
+                        <a href="#signin"><h5>Already Member?</h5></a>
                     </div>
 
                 </div>
-               
-                <div class="sign-up-htm">
+
+                <div class="sign-in-htm">
                     <br><br>
-                   <h3 style="color:white">Don't have an account?</h3><br>
-                   <h3 style="color:white">Click on the button below to Sign up!</h3>
+                   <h3 style="color:white">Already member?</h3><br>
+                   <h3 style="color:white">Click to Login!</h3>
                    <br>
                    <div class="group">
-                        <input type="submit" class="button si" value="Sign Up">
-                    </div>
+                        <input type="submit" class="button si" value="Sign In">
+                </div>
+<!--                
+                <div class="sign-in-htm">
+                    <br><br>
+                   <h3 style="color:white">Already have an account?</h3><br>
+                   <h3 style="color:white">Click to Login!</h3>
+                   <br>
+                   <div class="group">
+                        <input type="submit" class="button si" value="Sign In">
+                    </div> -->
             </div>
             
         </div>
@@ -389,32 +493,4 @@ a{color:inherit;text-decoration:none}
                 <ul class="social-links">
                     <li><a href="#"><i class="ion-social-facebook"></i></a></li>
                     <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                    <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                    <li><a href="#"><i class="ion-social-instagram"></i></a></li>
-
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-                Copyright &copy; 2015 by Freshmart. All rights reserved.
-            </p>
-        </div>
-    </footer>
-
- 
-
-<!-- Js plugins -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>
-<script src="vendors/js/jquery.waypoints.min.js"></script>
-<script src="resources/Js/script.js"></script>
-
-
-
-</body>
-
-</html>
+                    <li
