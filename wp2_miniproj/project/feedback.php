@@ -123,8 +123,12 @@
 		}
 		else{
 			$purpose = $_POST["purpose"];
-		}
-
+        }
+        if(isset($_POST["submit"])){
+        if($nameErr="" && $purErr="" && $radioErr="" && $emailErr=""){
+            header("Location:../feedback-inc.php");
+        }
+    }
 	}
 	?>
 
@@ -159,7 +163,7 @@
             <h2>We're happy to hear from you</h2>
         </div>
         <div class="row" id="feedback">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="contact-form">
+            <form action="feedback-inc.php" method="POST" class="contact-form">
             <label for="fname"><strong>First Name:</strong></label>
 		<input type="text" name="fname" id="fname" placeholder="John" autocomplete autofocus><br>
         <span class="error">*<?php echo "$nameErr";?></span>
