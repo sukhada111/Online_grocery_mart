@@ -250,9 +250,23 @@ a{color:inherit;text-decoration:none}
                 <ul class="main-nav">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">How it works</a></li>
-                    <li><a href="#">Login</a></li>
+                    <?php
+                        if(count($_SESSION)>0)
+                        {
+                            ?>
+                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            <li><a href="logout.php">Logout</a></li>
+
+                            <?php
+                        }
+                        else
+                        {
+                   ?>
+                    <li><a href="login_sess.php">Login</a></li>
                     <li><a href="#">Sign Up</a></li>
-                    <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                    <?php
+                        }
+                    ?>
 
 
                 </ul>
