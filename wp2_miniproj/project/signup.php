@@ -1,71 +1,4 @@
-<?php
-
-$unameErr=$passErr=$emailErr=$addressErr=$checkErr="";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-      
-    if (empty($_POST["username"])) {  
-        $unameErr = "Username is required";  
-   } else {  
-       $uname = input_data($_POST["username"]);  
-           
-   } 
-
-    if (empty($_POST["pwd"])) {  
-        $passErr = "Password is required";  
-   } else {  
-       $password = input_data($_POST["pwd"]);  
-           // check if name only contains letters and whitespace  
-           if (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/",$password)) {  
-               $passErr = "Password must contain atleast one number, one letter and should be 8-12 characters long!";  
-           }  
-   } 
-
-
-    if (empty($_POST["check"])) {  
-        $passErr = "Please confirm password";  
-    } else {  
-        $check = input_data($_POST["check"]); 
-        $password = input_data($_POST["pwd"]); 
-        // check if name only contains letters and whitespace  
-        if ($check != $password) {  
-            $checkErr = "Passwords should match!";  
-        }  
-    } 
-
-
-    if (empty($_POST["email"])) {  
-        $emailErr = "Email is required";  
-    } else {  
-        $email = $_POST["email"];  
-        // check that the e-mail address is well-formed  
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  
-            $emailErr = "Invalid email format";  
-        }  
-    } 
-
-
-    if (empty($_POST["address"])) {  
-        $addressErr = "Address is required";  
-   } else {  
-       $address = input_data($_POST["address"]);  
-           
-   }
-
-
-   
-}
-function input_data($data) {  
-    $data = trim($data);  
-    $data = stripslashes($data);  
-    $data = htmlspecialchars($data);  
-    return $data;  
-  }  
-
-    
-?>
-
-
-
+<?php include('server.php')  ?>
 
 <html lang="en">
 <head>
@@ -284,54 +217,11 @@ a{color:inherit;text-decoration:none}
     </header>
     <section class="section-form">
     
-        <?php
-        if(isset($_POST['submit'])) {  
-    
-            if($unameErr == "" && $passErr == "") {  
-               
-                ?>
-                <div class="row" align="center">
-                    <h3 style="color:black">
-                    <?php
-                echo "You have successfully logged in!</h3>";
-                ?>
-                </h3>
-                </div>
-
-              <?php
-            
-               
-            }
-            else
-            {
-                 
-               ?>
-                 <div class="row" align="center">
-                    <h3 style="color:black">
-                    <?php
-                echo "Please enter details appropriately!</h3>";
-                ?>
-                </h3>
-                </div>
-                <?php
-              
-            }
-            }
-            
-            else
-            {
-                ?>
-        <div class="row">
-            <h2 style="color:black">Sign up to avail the best offers on fresh groceries!</h2>
-        </div>
-        <br>
-        <?php
-            }
-            ?>
         <div class="row">
         <div class="login-wrap">
         <div class="login-html">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+        <form action="signup.php" method="post">
+        
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign In</label>
            
@@ -421,7 +311,7 @@ a{color:inherit;text-decoration:none}
                     
                     <div class="hr"></div>
                     <div class="foot-lnk">
-                        <a href="#forgot"><h5>Already member?</h5></a>
+                        <a href="login_form.php"><h5>Already member?</h5></a>
                     </div>
 
                 </div>
@@ -432,7 +322,7 @@ a{color:inherit;text-decoration:none}
                    <h3 style="color:white">Click to Login!</h3>
                    <br>
                    <div class="group">
-                        <input type="submit" class="button si" value="Sign Up">
+                        <input type="submit" class="button si" value="Login">
                     </div>
             </div>
             
