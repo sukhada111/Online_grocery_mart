@@ -37,7 +37,7 @@ function input_data($data) {
         // setcookie('password',$password);
         $_SESSION['username']=$uname;
         $_SESSION['password']=$password;
-        header('Location:index.php');
+        header('Location:index_pass.php');
     
        
     }
