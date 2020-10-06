@@ -4,7 +4,7 @@
  
  $servername="localhost";
 $username="root";
-$password="sukh123";
+$password="";
 $dbname="wp_freshmart";
 
 $conn=mysqli_connect($servername,$username,$password,$dbname);
