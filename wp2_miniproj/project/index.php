@@ -1,5 +1,5 @@
 <?php
-
+//new index file
 session_start();
 ?>
 <html lang="en">
