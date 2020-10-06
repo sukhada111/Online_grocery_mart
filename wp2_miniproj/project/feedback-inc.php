@@ -121,9 +121,10 @@ margin-bottom:5%;
     echo "<h2 style='margin-top:1%;'>Thank You for your feedback!</h2>"."<br>";
     }
 ?>
+
 <div class="container">
 <a class="btn btn-full" href="#">Shop More</a>
-<a class="btn btn-ghost" href="#">About Us</a>
+<a class="btn btn-ghost" href="feededit.php">Edit About Us</a>
 </div>
 
 
