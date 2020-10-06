@@ -27,7 +27,7 @@ $address = mysqli_real_escape_string($db, $_POST['address']);
 
 // Form Validation
 
-$unameErr=$passErr=$emailErr=$addressErr=$checkErr="";
+$unameErr=$passErr=$emailErr=$addressErr=$checkErr=$existErr=$exist1Err="";
       
 if (empty($username))
 {  
@@ -129,7 +129,7 @@ if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($db, $_POST['username']);
     $pwd = mysqli_real_escape_string($db, $_POST['pwd']);
 
-    $unameErr = $passErr = "";
+    $unameErr = $passErr = $wrongErr = $notexistErr = "";
   
     if (empty($username)) {
         $unameErr = "Username is required";
@@ -141,18 +141,31 @@ if (isset($_POST['login'])) {
     }
   
     if (count($errors) == 0) {
-        $password = password_hash($pwd, PASSWORD_DEFAULT);
-        $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
-        $results = mysqli_query($db, $query);
-        if (mysqli_num_rows($results) == 1) {
-          $_SESSION['username'] = $username;
-          $_SESSION['success'] = "You are now logged in";
-          header('location: index.php');
-        }else {
-            $wrongErr = "Wrong username/password combination";
-            array_push($errors, $wrongErr);
-        }
-    }
+        $query = "SELECT * FROM user WHERE username = '$username'";  
+        $result = mysqli_query($db, $query);  
+        if(mysqli_num_rows($result) > 0)  
+        {  
+             while($row = mysqli_fetch_array($result))  
+             {  
+                  if(password_verify($pwd, $row["password"]))  
+                  {  
+                    $_SESSION['username'] = $username;
+                    $_SESSION['success'] = "You are now logged in";
+                    header('location: index.php'); 
+                  }  
+                  else  
+                  {  
+                    $wrongErr = "Wrong username/password combination";
+                    array_push($errors, $wrongErr);
+                  }  
+             }  
+        }  
+        else  
+        {  
+             $wrongErr = "User does not exist! Sign Up for more...";
+             array_push($errors, $notexistErr);
+        }  
+   } 
   }
 
 

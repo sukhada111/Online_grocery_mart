@@ -231,50 +231,10 @@ a{color:inherit;text-decoration:none}
     </header>
     <section class="section-form">
     
-        <?php
-        if(isset($_POST['submit'])) {  
-    
-            if($unameErr == "" && $passErr == "") {  
-               
-                ?>
-                <div class="row" align="center">
-                    <h3 style="color:black">
-                    <?php
-                echo "You have successfully logged in!</h3>";
-                ?>
-                </h3>
-                </div>
-
-              <?php
-            
-               
-            }
-            else
-            {
-                 
-               ?>
-                 <div class="row" align="center">
-                    <h3 style="color:black">
-                    <?php
-                echo "Please enter details appropriately!</h3>";
-                ?>
-                </h3>
-                </div>
-                <?php
-              
-            }
-            }
-            
-            else
-            {
-                ?>
         <div class="row">
             <h2 style="color:black">Sign in to find fresh groceries at the best price!</h2>
         </div>
         <br>
-        <?php
-            }
-            ?>
         <div class="row">
         <div class="login-wrap">
         <div class="login-html">
