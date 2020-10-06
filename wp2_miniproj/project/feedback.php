@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -82,13 +86,13 @@
   
 </head>
 <body>
+
 <?php
 	$nameErr = "";
 	$emailErr="";
-	$radioErr="";
 	$purErr = "";
 
-
+if(isset($_POST["submit"])){
 	if (isset($_POST["fname"])) {
 		if (empty($_POST["fname"])) {
 		  $nameErr = "Name is required";
@@ -112,7 +116,7 @@
 			  
 		  }
 		else {
-			$uname = $_POST["uname"];
+			$email = $_POST["email"];
 		  }
 	}
 
@@ -124,13 +128,47 @@
 		else{
 			$purpose = $_POST["purpose"];
         }
-        if(isset($_POST["submit"])){
-        if($nameErr="" && $purErr="" && $radioErr="" && $emailErr=""){
-            header("Location:../feedback-inc.php");
+    
+    }
+}
+  
+	?>
+      <?php
+    if(isset($_POST["submit"])){
+        $_SESSION["fname"]=$_POST["fname"];
+        $_SESSION["email"]=$_POST["email"];
+        $_SESSION["purpose"]=$_POST["purpose"];
+        $_SESSION["message"]=$_POST["message"];
+
+        if(empty($_SESSION["fname"])){
+            header("Location:feedback.php?error=FisrtNameRequired");
+            exit();
+        }
+        else if(!preg_match("/^[a-zA-Z' ]*$/",$_SESSION["fname"])){
+            header("Location:feedback.php?error=FisrtNameMustBeAlphabetic");
+            exit();
+        }
+        else if(empty($_SESSION["email"])){
+            header("Location:feedback.php?error=EmailRequired");
+            exit();
+        }
+        else if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+            header("Location:feedback.php?error=InvalidEmailFormat");
+            exit();
+        }
+        else if(empty($_SESSION["purpose"])){
+            header("Location:feedback.php?error=PurposeRequired");
+            exit();
+        }
+        else{
+        
+        header("Location:feedback-inc.php");
+        exit();
         }
     }
-	}
-	?>
+    ?>  
+    
+    
 
     <!-- HEADER AND NAVBAR -->
     <header>
@@ -156,6 +194,7 @@
         <h1>Feedback Form</h1>
         </div>
     </header>
+
    
     <!-- FORM SECTION -->
     <section class="section-form">
@@ -163,7 +202,7 @@
             <h2>We're happy to hear from you</h2>
         </div>
         <div class="row" id="feedback">
-            <form action="feedback-inc.php" method="POST" class="contact-form">
+            <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="contact-form">
             <label for="fname"><strong>First Name:</strong></label>
 		<input type="text" name="fname" id="fname" placeholder="John" autocomplete autofocus><br>
         <span class="error">*<?php echo "$nameErr";?></span>
@@ -191,7 +230,7 @@
 		<span class="error">*<?php echo "$purErr";?></span>
 		<br>
         <br>
-        <label for="rate"><strong>Rate your experience:</strong></label>
+        <!-- <label for="rate"><strong>Rate your experience:</strong></label>
         <span class="rating">
         <input type="radio" class="rating-input"
         id="rating-input-1-5" name="rating-input-1">
@@ -210,18 +249,18 @@
         <label for="rating-input-1-1" class="rating-star"></label>
     </span>
     <br>
-    <br>
+    <br> -->
         <h4>Drop us a line</h4>
 		<textarea rows="5" cols="40" placeholder="Write something Here..." name="message" id="message"></textarea>
 		<br>
 		<br>
-		<input type="Submit" Value="Send It!" name="submit">
+		<input type="submit"  Value="Submit" name="submit">
 	
 	</form>
+ 
         </div>
     </section>
-
-    
+  
 
     
     
