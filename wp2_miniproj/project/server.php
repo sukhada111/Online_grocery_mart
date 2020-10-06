@@ -96,12 +96,14 @@ $user = mysqli_fetch_assoc($results);
 if($user){
     if($user['username'] === $username)
     {
-        array_push($errors, "Username already exists");
+        $existErr = "Username already exists";  
+        array_push($errors, $existErr);
     }
 
     if($user['email'] === $email)
     {
-        array_push($errors, "This email id already has a registered username");
+        $exist1Err = "This email id already has a registered username";  
+        array_push($errors, $exist1Err);
     }
 }
 
@@ -121,6 +123,37 @@ if(count($errors) == 0)
 }
 
 }
+
+// LOGIN USER
+if (isset($_POST['login'])) {
+    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $pwd = mysqli_real_escape_string($db, $_POST['pwd']);
+
+    $unameErr = $passErr = "";
+  
+    if (empty($username)) {
+        $unameErr = "Username is required";
+        array_push($errors, $unameErr);
+    }
+    if (empty($pwd)) {
+        $passErr = "Password is required";
+        array_push($errors, $passErr);
+    }
+  
+    if (count($errors) == 0) {
+        $password = password_hash($pwd, PASSWORD_DEFAULT);
+        $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+        $results = mysqli_query($db, $query);
+        if (mysqli_num_rows($results) == 1) {
+          $_SESSION['username'] = $username;
+          $_SESSION['success'] = "You are now logged in";
+          header('location: index.php');
+        }else {
+            $wrongErr = "Wrong username/password combination";
+            array_push($errors, $wrongErr);
+        }
+    }
+  }
 
 
 

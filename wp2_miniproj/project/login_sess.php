@@ -1,52 +1,4 @@
-<?php
-session_start();
-$unameErr=$passErr="";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-      
-    if (empty($_POST["username"])) {  
-        $unameErr = "Username is required";  
-   } else {  
-       $uname = input_data($_POST["username"]);  
-           
-   } 
-
-    if (empty($_POST["pwd"])) {  
-        $passErr = "Password is required";  
-   } else {  
-       $password = input_data($_POST["pwd"]);  
-           // check if name only contains letters and whitespace  
-           if (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/",$password)) {  
-               $passErr = "Password must contain atleast one number, one letter and should be 8-12 characters long!";  
-           }  
-   } 
-
-   
-}
-function input_data($data) {  
-    $data = trim($data);  
-    $data = stripslashes($data);  
-    $data = htmlspecialchars($data);  
-    return $data;  
-  }  
-
-  if(isset($_POST['submit'])) {  
-    
-    if($unameErr == "" && $passErr == "") {  
-       
-        // setcookie('username',$uname);
-        // setcookie('password',$password);
-        $_SESSION['username']=$uname;
-        $_SESSION['password']=$password;
-        header('Location:index.php');
-    
-       
-    }
-}  
-    
-?>
-
-
-
+<?php include('server.php')  ?>
 
 <html lang="en">
 <head>
@@ -326,7 +278,7 @@ a{color:inherit;text-decoration:none}
         <div class="row">
         <div class="login-wrap">
         <div class="login-html">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+        <form action="login_sess.php" method="post">
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
            
@@ -341,6 +293,7 @@ a{color:inherit;text-decoration:none}
                         {
                             ?>
                         <span class="error"><?php echo $unameErr;?> </span>
+                        <span class="error"><?php echo $wrongErr;?> </span>
                         <br>
                         <?php
                         }
@@ -368,7 +321,7 @@ a{color:inherit;text-decoration:none}
                      
                     </div>
                     <div class="group">
-                        <input type="submit" name="submit" class="button" value="Sign In">
+                        <input type="submit" name="login" class="button" value="Sign In">
                     </div>
                     
                     <div class="hr"></div>
