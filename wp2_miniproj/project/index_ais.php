@@ -1,22 +1,39 @@
 <?php
+    session_start();
 
-session_start();
+    if(isset($_SESSION['username']))
+    {
+        $_SESSION['msg'] = "Successfully registered";
+    }
+    else
+    {
+        $_SESSION['msg'] = "You must login or sign up to view this page";
+        header("location: login_form.php");
+    }
+
 ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freshmart</title>
+    <title>Omnifood</title>
 
-    
+    <link rel="stylesheet" href="resources/css/style_index.css">
     <link rel="stylesheet" href="resources/css/queries.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/grid.css">
-    <link rel="stylesheet" href="resources/css/style_index.css">
-    
+    <style>
+        h3{
+    font-size: 110%;
+    margin-bottom: 15px;
+    color: #fff;
+}
+    </style>
+
   
 </head>
 <body>
@@ -31,24 +48,9 @@ session_start();
                 <ul class="main-nav">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">How it works</a></li>
-                   <?php
-                        if(count($_SESSION)>0)
-                        {
-                            ?>
-                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
-                            <li><a href="logout.php">Logout</a></li>
-
-                            <?php
-                        }
-                        else
-                        {
-                   ?>
-                    <li><a href="login_sess.php">Login</a></li>
-                    <li><a href="signup.php">Sign Up</a></li>
-                    <?php
-                        }
-                    ?>
-                 
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
 
 
                 </ul>
@@ -60,24 +62,30 @@ session_start();
             <h1>Compare and Find <br> your groceries at the best price. </h1>
             <a class="btn btn-full" href="#">Order Now</a>
             <a class="btn btn-ghost" href="#">Know More</a>
+            <br><br><br><br>
+            <?php if(isset($_SESSION['username'])) : ?>
+                <h3>Welcome, <strong><?php echo $_SESSION['username']; ?></strong></h3>
+            <?php endif ?>
         </div>
+
+        
+
+
     </header>
     <!-- FEATURES SECTION  -->
 
-    <section class="features js--section-features js--wp-1">
+    <section class="features js--section-features">
+
+
+        <?php if(isset($_SESSION['success'])) : ?>
         
         <div class="row">
 
-<?php
+            <?php
+                echo $_SESSION['success']."<br><br><br><br>";
+                unset($_SESSION['success']);
+            ?>
 
-if(count($_SESSION)>0)
-                        {
-                            ?>
-                            <h2>Welcome <?php echo $_SESSION['username'];?> !</h2>
-                            <br>
-                            <?php
-                        }
-                        ?>
             <h2>Never overpay for groceries again.</h2>
             <p class="long-copy">
 
@@ -85,6 +93,7 @@ if(count($_SESSION)>0)
 
             </p>
         </div>
+        <?php endif ?>
 
         <div class="row">
             <div class="col span-1-of-4 box">
@@ -125,49 +134,6 @@ if(count($_SESSION)>0)
                 </p>
             
             </div>
-        </div>
-
-    </section>
-
-    <!-- TESTIMONIALS SECTION -->
-    <section class="section-testimonials">
-
-        <div class="row">
-            <h2>Our customers can't live without us</h2>
-        </div>
-
-        <div class="row">
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Freshmart is just awesome! I just launched a startup which leaves me with no time for visiting grocery stores, so Freshmart is a life-saver. Now that I got used to it, I don't feel the need to go to the grocery store anymore!
-                    
-                    <cite>
-                        <img src="resources/img/customer-1.jpg" alt=""> 
-                        Alberto Duncan
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Saving money, quick service, access to the best stores and delivered right to my home. We have lots of Online grocery marts here in Mumbai, but no one comes even close to Freshmart. Me and my family are so in love!
-                    
-                    <cite>
-                        <img src="resources/img/customer-2.jpg" alt=""> 
-                        Joana Silva
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    I was looking for a quick and easy Online Grocery Store service in Mumbai. I tried a lot of them and ended up with Freshmart. One of the best e-stores I have seen. Keep up the great work!
-                    
-                    <cite>
-                        <img src="resources/img/customer-3.jpg" alt=""> 
-                        Milton Chapman
-                    </cite>
-                </blockquote>
-            </div>
-
         </div>
 
     </section>

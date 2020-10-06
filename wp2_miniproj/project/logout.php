@@ -11,7 +11,7 @@ session_destroy();
 setcookie($sess_name,"",time()-3600,"/");
 setcookie('username',"",time()-3600,"/");
 setcookie('password',"",time()-3600,"/");
-setcookie('store',"",time()-3600,"/");
+
 header('Location:index.php');
 
 

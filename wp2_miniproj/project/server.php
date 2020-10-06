@@ -14,7 +14,7 @@ $errors = array();
 
 // Connect to db
 
-$db = mysqli_connect('localhost', 'root', '', 'grocery_mart') or die("Could not connect to database");
+$db = mysqli_connect('localhost', 'root', 'sukh123', 'wp_freshmart') or die("Could not connect to database");
 
 // Registering users
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freshmart</title>
 
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/style_index.css">
     <link rel="stylesheet" href="resources/css/queries.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
@@ -200,11 +200,25 @@ a{color:inherit;text-decoration:none}
                 <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
                 <img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black">
                 <ul class="main-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="#">How it works</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Sign Up</a></li>
-                    <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                    <?php
+                        if(count($_SESSION)>0)
+                        {
+                            ?>
+                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            <li><a href="logout.php">Logout</a></li>
+
+                            <?php
+                        }
+                        else
+                        {
+                   ?>
+                    <li><a href="login_sess.php">Login</a></li>
+                    <li><a href="signup.php">Sign Up</a></li>
+                    <?php
+                        }
+                    ?>
 
 
                 </ul>
