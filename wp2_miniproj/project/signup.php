@@ -250,6 +250,7 @@ a{color:inherit;text-decoration:none}
                         {
                             ?>
                         <span class="error"><?php echo $unameErr;?> </span>
+                        <span class="error"><?php echo $existErr;?> </span>
                         <br>
                         <?php
                         }
@@ -291,6 +292,7 @@ a{color:inherit;text-decoration:none}
                         {
                             ?>
                         <span class="error"><?php echo $emailErr;?> </span>
+                        <span class="error"><?php echo $exist1Err;?> </span>
                         <br>
                         <?php
                         }
