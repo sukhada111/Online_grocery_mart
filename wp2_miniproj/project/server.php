@@ -117,7 +117,7 @@ if(count($errors) == 0)
     mysqli_query($db, $query);
     $_SESSION['username'] = $username;
     $_SESSION['success'] = "You are logged in";
-
+    //pass index_pass.php in header for change password functionality
     header('location: index.php');
 
 }
@@ -151,6 +151,7 @@ if (isset($_POST['login'])) {
                   {  
                     $_SESSION['username'] = $username;
                     $_SESSION['success'] = "You are now logged in";
+                    //pass index_pass.php in header for change password functionality
                     header('location: index.php'); 
                   }  
                   else  
