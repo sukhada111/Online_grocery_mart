@@ -58,7 +58,7 @@ if(mysqli_query($conn,$sql))
 {
     echo "Password updated successfully!";
     $_SESSION['pass_msg']="Password updated successfully!";
-    header('Location:index_pass.php');
+    header('Location:index.php');
 }
 else
 {
