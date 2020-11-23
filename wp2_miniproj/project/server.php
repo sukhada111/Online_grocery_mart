@@ -2,6 +2,19 @@
 //starting session
 session_start();
 
+// Connect to db
+
+$dbHost = "localhost";
+$dbUser = "root";
+$dbPass = "";
+$dbName = "wp_freshmart";
+
+$db = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
+
+if(!$db){
+    die('Database Connection failed!');
+}
+
 // Initialising variables
 
 $username = "";
@@ -12,9 +25,6 @@ $address = "";
 
 $errors = array();
 
-// Connect to db
-
-$db = mysqli_connect('localhost', 'root', '', 'wp_freshmart') or die("Could not connect to database");
 
 // Registering users
 
@@ -112,13 +122,24 @@ if($user){
 if(count($errors) == 0)
 {
     $password = password_hash($pwd, PASSWORD_DEFAULT); // for encrypting password
-    $query = "INSERT INTO user (username, password, email, address) VALUES ('$username', '$password', '$email', '$address')";
+
+    $sqlin = "INSERT into user (username, password, email, address) VALUES (?,?,?,?)";
+    $stmt = mysqli_stmt_init($db);
+
+    if(mysqli_stmt_prepare($stmt,$sqlin)){
+
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $password, $email, $address);
+        mysqli_stmt_execute($stmt);
+        $_SESSION['username'] = $username;
     
-    mysqli_query($db, $query);
-    $_SESSION['username'] = $username;
-    $_SESSION['success'] = "You are logged in";
-    //pass index_pass.php in header for change password functionality
-    header('location: index.php');
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    
+    // Close connection
+    mysqli_close($db);
+    header("Location: index.php");
 
 }
 

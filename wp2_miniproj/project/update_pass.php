@@ -2,7 +2,7 @@
  session_start();
 
  
- $servername="localhost";
+$servername="localhost";
 $username="root";
 $password="";
 $dbname="wp_freshmart";
@@ -77,10 +77,5 @@ else
       {
         header("Location:change_pass.php?&passErr=".$passErr."&unameErr=".$unameErr);
       }
-
-
-
-
-
 
 ?>
