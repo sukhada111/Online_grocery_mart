@@ -108,7 +108,8 @@ $password = "";
 $dbname = "wp_freshmart";
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
-$sql = "SELECT * FROM products WHERE name='Butter'";
+$prod_name=$_GET['pro'];
+$sql = "SELECT * FROM products WHERE name='$prod_name'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 while( $record = mysqli_fetch_array($resultset) ) {
 ?>

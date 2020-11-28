@@ -72,18 +72,20 @@ nav{
 
 
 
+
     <div class="row">
     <?php
+    $categ=$_GET['cat'];
 
 $connection = mysqli_connect('localhost', 'root', '', 'wp_freshmart') or die("Could not connect to database");
-if($stmt = $connection->query("SELECT * FROM products")){
+if($stmt = $connection->query("SELECT * FROM products where category='$categ'")){
 
 
 
 while ($row = $stmt->fetch_assoc()) {
     ?>
     <div class="col-sm-4">
-    <div class="card shadow mb-4 ">
+    <div class="card shadow mb-4 "style="max-height:400px" >
         <img class="card-img-top" src= <?php echo "resources/img/$row[img]";?> alt="Card image" width="400px" height="200px">
         <div class="card-body">
         <h4 class="card-title"> <?php echo "$row[name]"; ?></h4>
@@ -91,7 +93,7 @@ while ($row = $stmt->fetch_assoc()) {
         <br>
         Price: Rs. <?php echo "$row[price]"; ?>
         </p>
-        <a href="#" class=" stretched-link"></a>
+        <a href="product.php?&pro=<?php echo $row['name'];?>" class=" stretched-link"></a>
         </div>
     </div>
 
@@ -109,8 +111,9 @@ else{
 echo $connection->error;
 }
 
-     ?>  
-    </div>
+     ?>
+     </div>  
+   
 
     <footer>
         <div class="row">

@@ -73,7 +73,7 @@ nav{
                     <div class="card-body">
                     <h4 class="card-title">Fruits and Vegetables</h4>
                     <p class="card-text">Find fresh fruits and vegetables at the best price!</p>
-                    <a href="#" class=" stretched-link"></a>
+                    <a href="products.php?&cat=fv" class=" stretched-link"></a>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@ nav{
                     <div class="card-body">
                     <h4 class="card-title">Oils and Food Grains</h4>
                     <p class="card-text">Your place, to get Oils and Food grains of best quality!</p>
-                    <a href="#" class=" stretched-link"></a>
+                    <a href="products.php?&cat=og" class=" stretched-link"></a>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@ nav{
                     <div class="card-body">
                     <h4 class="card-title">Dairy and Bakery</h4>
                     <p class="card-text">Find raw milk and dairy products with the right nutrition value !</p>
-                    <a href="#" class=" stretched-link"></a>
+                    <a href="products.php?&cat=db" class=" stretched-link"></a>
                     </div>
                 </div>
 
