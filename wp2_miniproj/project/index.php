@@ -1,6 +1,8 @@
 <?php
 //new index file
+
 session_start();
+
 ?>
 <html lang="en">
 <head>
@@ -35,9 +37,11 @@ session_start();
                         if(count($_SESSION)>0)
                         {
                             ?>
+                            <li><a href="change_pass.php">Change password</a></li>
                             <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            
                             <li><a href="logout.php">Logout</a></li>
-
+                            
                             <?php
                         }
                         else
@@ -58,7 +62,7 @@ session_start();
         <div class="hero-text-box">
 
             <h1>Compare and Find <br> your groceries at the best price. </h1>
-            <a class="btn btn-full" href="#">Order Now</a>
+            <a class="btn btn-full" href="categ.php">Order Now</a>
             <a class="btn btn-ghost" href="#">Know More</a>
         </div>
     </header>
@@ -75,7 +79,20 @@ if(count($_SESSION)>0)
                             ?>
                             <h2>Welcome <?php echo $_SESSION['username'];?> !</h2>
                             <br>
+                            
+                            <?php if(isset($_SESSION['pass_msg']))
+                            {
+                                ?>
+                                <h2 style="font-size:25px;">
+                                <?php echo $_SESSION['pass_msg'];
+                                ?>
+                                </h2>
+                                <?php
+                            }
+                            ?>
+                            
                             <?php
+
                         }
                         ?>
             <h2>Never overpay for groceries again.</h2>

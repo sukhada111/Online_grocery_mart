@@ -1,8 +1,6 @@
 <?php
 //new index file
-
 session_start();
-
 ?>
 <html lang="en">
 <head>
@@ -15,11 +13,26 @@ session_start();
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
 
+    
+ 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/grid.css">
     <link rel="stylesheet" href="resources/css/style_index.css">
+    <link href='https://fonts.googleapis.com/css?family=Almendra' rel='stylesheet'>
     
-  
+    <style>
+        .bcontent {
+            margin-top: 10px;
+        } 
+        .card-text {
+            font-family: 'Almendra';
+        }
+    </style> 
 </head>
 <body>
 
@@ -39,7 +52,7 @@ session_start();
                             ?>
                             <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
                             <li><a href="logout.php">Logout</a></li>
-                            <li><a href="change_pass.php">Change password</a></li>
+
                             <?php
                         }
                         else
@@ -77,113 +90,55 @@ if(count($_SESSION)>0)
                             ?>
                             <h2>Welcome <?php echo $_SESSION['username'];?> !</h2>
                             <br>
-                            
-                            <?php if(isset($_SESSION['pass_msg']))
-                            {
-                                ?>
-                                <h2 style="font-size:25px;">
-                                <?php echo $_SESSION['pass_msg'];
-                                ?>
-                                </h2>
-                                <?php
-                            }
-                            ?>
-                            
                             <?php
-
                         }
                         ?>
-            <h2>Never overpay for groceries again.</h2>
+            
             <p class="long-copy">
 
                 Hello, we’re Freshmart, your new premium grocery delivery service. We know you’re always busy. Freshmart gives shoppers the power to make their best decision, every time, every trip.
 
             </p>
         </div>
+<br><br><br><br>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "wp_freshmart";
+$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
-        <div class="row">
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-infinite-outline icon-big"></i>
-                <h3>All year round</h3>
-                <p>
-                    Never waste time again! We work towards saving your time and money on groceries and everyday purchases.
-
-                </p>
-            
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-stopwatch-outline icon-big"></i>
-                <h3>Delivery in 2 days</h3>
-                <p>
-                    You're only 2 days away from your fresh groceries delivered right to your home. We work with only the best to ensure that you're a 100% happy.
-                </p>
-            
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-nutrition-outline icon-big"></i>
-                <h3>100% fresh</h3>
-                <p>
-                    All our products are fresh, organic and local. Animals are raised without added hormones or antibiotics. Good for your health, the environment, and it also tastes better!
-
-                </p>
-            
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-cart-outline icon-big"></i>
-                <h3> Order anything</h3>
-                <p>
-                    We don't limit ourselves, which means you can order whatever you feel like, at the best prices.  Freshmart lets you instantly see which stores have your favourite products and what the price is at each store.
-
-                </p>
-            
+$prod_name=$_GET['pro'];
+$sql = "SELECT * FROM products WHERE name='$prod_name'";
+$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+while( $record = mysqli_fetch_array($resultset) ) {
+?>
+<center>
+<div class="container bcontent">
+        <hr />
+        <div class="card" style="max-width: 1000px;">
+            <div class="row no-gutters">
+                <div class="col-sm-5">
+                    <img class="card-img" alt="" src=<?php echo "resources/img/$record[img]";?>>
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $record['name']; ?></h5>
+                        <p class="card-text">Seller:&nbsp;&nbsp;<?php echo $record['seller']; ?><br><b>Product:&nbsp;&nbsp;</b><?php echo $record['name']; ?><br><b>Category:&nbsp;&nbsp;</b><?php echo $record['category']; ?><br><b>Price:&nbsp;&nbsp;Rs. </b><?php echo $record['price']; ?></p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <br><br><br>
 
-    </section>
+<?php }
 
-    <!-- TESTIMONIALS SECTION -->
-    <section class="section-testimonials">
+?>
+</center>
+<br><br><br>
 
-        <div class="row">
-            <h2>Our customers can't live without us</h2>
-        </div>
-
-        <div class="row">
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Freshmart is just awesome! I just launched a startup which leaves me with no time for visiting grocery stores, so Freshmart is a life-saver. Now that I got used to it, I don't feel the need to go to the grocery store anymore!
-                    
-                    <cite>
-                        <img src="resources/img/customer-1.jpg" alt=""> 
-                        Alberto Duncan
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Saving money, quick service, access to the best stores and delivered right to my home. We have lots of Online grocery marts here in Mumbai, but no one comes even close to Freshmart. Me and my family are so in love!
-                    
-                    <cite>
-                        <img src="resources/img/customer-2.jpg" alt=""> 
-                        Joana Silva
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    I was looking for a quick and easy Online Grocery Store service in Mumbai. I tried a lot of them and ended up with Freshmart. One of the best e-stores I have seen. Keep up the great work!
-                    
-                    <cite>
-                        <img src="resources/img/customer-3.jpg" alt=""> 
-                        Milton Chapman
-                    </cite>
-                </blockquote>
-            </div>
-
-        </div>
 
     </section>
 
@@ -221,7 +176,7 @@ if(count($_SESSION)>0)
         </div>
     </footer>
 
- 
+
 
 <!-- Js plugins -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -2,19 +2,6 @@
 //starting session
 session_start();
 
-// Connect to db
-
-$dbHost = "localhost";
-$dbUser = "root";
-$dbPass = "";
-$dbName = "wp_freshmart";
-
-$db = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
-
-if(!$db){
-    die('Database Connection failed!');
-}
-
 // Initialising variables
 
 $username = "";
@@ -22,9 +9,11 @@ $email = "";
 $pwd = "";
 $check = "";
 $address = "";
-
 $errors = array();
 
+// Connect to db
+
+$db = mysqli_connect('localhost', 'root', '', 'wp_freshmart') or die("Could not connect to database");
 
 // Registering users
 
@@ -37,7 +26,7 @@ $address = mysqli_real_escape_string($db, $_POST['address']);
 
 // Form Validation
 
-$unameErr=$passErr=$emailErr=$addressErr=$checkErr=$existErr=$exist1Err="";
+$unameErr=$passErr=$emailErr=$addressErr=$checkErr=$existErr=$exist1Err=$timeoutErr="";
       
 if (empty($username))
 {  
@@ -122,24 +111,13 @@ if($user){
 if(count($errors) == 0)
 {
     $password = password_hash($pwd, PASSWORD_DEFAULT); // for encrypting password
-
-    $sqlin = "INSERT into user (username, password, email, address) VALUES (?,?,?,?)";
-    $stmt = mysqli_stmt_init($db);
-
-    if(mysqli_stmt_prepare($stmt,$sqlin)){
-
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $password, $email, $address);
-        mysqli_stmt_execute($stmt);
-        $_SESSION['username'] = $username;
+    $query = "INSERT INTO user (username, password, email, address) VALUES ('$username', '$password', '$email', '$address')";
     
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
-
-    
-    // Close connection
-    mysqli_close($db);
-    header("Location: index.php");
+    mysqli_query($db, $query);
+    $_SESSION['username'] = $username;
+    $_SESSION['success'] = "You are logged in";
+    //pass index_pass.php in header for change password functionality
+    header('location: index_pass.php');
 
 }
 
@@ -172,13 +150,41 @@ if (isset($_POST['login'])) {
                   {  
                     $_SESSION['username'] = $username;
                     $_SESSION['success'] = "You are now logged in";
+                    mysqli_query($db,"delete from loginlogs where IpAddress='$ip_address'");
                     //pass index_pass.php in header for change password functionality
-                    header('location: index.php'); 
+                    header('location: index_pass.php'); 
                   }  
                   else  
                   {  
-                    $wrongErr = "Wrong username/password combination";
+                   
+                    $time=time()-300;
+                    $ip_address=getIpAddr();
+                    // Getting total count of hits on the basis of IP
+                    $query=mysqli_query($db,"select count(*) as total_count from loginlogs where TryTime > $time and IpAddress='$ip_address'");
+                    $check_login_row=mysqli_fetch_assoc($query);
+                    $total_count=$check_login_row['total_count'];
+                    //Checking if the attempt 3, or youcan set the no of attempt her. For now we taking only 3 fail attempted
+                    $total_count++;
+                    $rem_attm=3-$total_count;
+                    $wrongErr = "Wrong username/password combination."."<br>".$rem_attm."attempts remaining."."<br>";
                     array_push($errors, $wrongErr);
+                    if($rem_attm==0){
+                    $timeoutErr="Too many failed login attempts. Please login after 15 seconds";
+                    array_push($errors,$timeoutErr);
+
+                    }
+                    else{
+                        $timeoutErr="";
+                    }
+                    if($total_count==4){
+                        sleep(15);
+                        header("location:loginDummy.php?TimeoutError");
+                        $total_count=0;
+                        exit();
+                    }
+                    $try_time=time();
+                    mysqli_query($db,"insert into loginlogs(IpAddress,TryTime) values('$ip_address','$try_time')");
+                    }
                   }  
              }  
         }  
@@ -186,10 +192,21 @@ if (isset($_POST['login'])) {
         {  
              $wrongErr = "User does not exist! Sign Up for more...";
              array_push($errors, $notexistErr);
-        }  
-   } 
-  }
+        } 
+       
+   }
 
+// Getting IP Address
+function getIpAddr(){
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+    $ipAddr=$_SERVER['HTTP_CLIENT_IP'];
+    }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+    $ipAddr=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+    $ipAddr=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ipAddr;
+    }
 
 
 ?>

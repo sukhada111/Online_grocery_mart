@@ -2,7 +2,7 @@
  session_start();
 
  
- $servername="localhost";
+$servername="localhost";
 $username="root";
 $password="";
 $dbname="wp_freshmart";
@@ -58,7 +58,7 @@ if(mysqli_query($conn,$sql))
 {
     echo "Password updated successfully!";
     $_SESSION['pass_msg']="Password updated successfully!";
-    header('Location:index_pass.php');
+    header('Location:index.php');
 }
 else
 {
@@ -77,10 +77,5 @@ else
       {
         header("Location:change_pass.php?&passErr=".$passErr."&unameErr=".$unameErr);
       }
-
-
-
-
-
 
 ?>
