@@ -28,7 +28,7 @@ session_start();
     <style>
         .bcontent {
             margin-top: 10px;
-        }
+        } 
         .card-text {
             font-family: 'Almendra';
         }
@@ -115,10 +115,10 @@ while( $record = mysqli_fetch_array($resultset) ) {
 <center>
 <div class="container bcontent">
         <hr />
-        <div class="card" style="width: 1000px;">
+        <div class="card" style="max-width: 1000px;">
             <div class="row no-gutters">
                 <div class="col-sm-5">
-                    <img class="card-img" alt="" src="<?php echo $record['image']; ?>">
+                    <img class="card-img" alt="" src=<?php echo "resources/img/$record[img]";?>>
                 </div>
                 <div class="col-sm-7">
                     <div class="card-body">
@@ -137,89 +137,7 @@ while( $record = mysqli_fetch_array($resultset) ) {
 ?>
 </center>
 <br><br><br>
-        <div class="row">
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-infinite-outline icon-big"></i>
-                <h3>All year round</h3>
-                <p>
-                    Never waste time again! We work towards saving your time and money on groceries and everyday purchases.
 
-                </p>
-            
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-stopwatch-outline icon-big"></i>
-                <h3>Delivery in 2 days</h3>
-                <p>
-                    You're only 2 days away from your fresh groceries delivered right to your home. We work with only the best to ensure that you're a 100% happy.
-                </p>
-            
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-nutrition-outline icon-big"></i>
-                <h3>100% fresh</h3>
-                <p>
-                    All our products are fresh, organic and local. Animals are raised without added hormones or antibiotics. Good for your health, the environment, and it also tastes better!
-
-                </p>
-            
-            </div>
-
-            <div class="col span-1-of-4 box">
-                <i class="ion-ios-cart-outline icon-big"></i>
-                <h3> Order anything</h3>
-                <p>
-                    We don't limit ourselves, which means you can order whatever you feel like, at the best prices.  Freshmart lets you instantly see which stores have your favourite products and what the price is at each store.
-
-                </p>
-            
-            </div>
-        </div>
-
-    </section>
-
-    <!-- TESTIMONIALS SECTION -->
-    <section class="section-testimonials">
-
-        <div class="row">
-            <h2>Our customers can't live without us</h2>
-        </div>
-
-        <div class="row">
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Freshmart is just awesome! I just launched a startup which leaves me with no time for visiting grocery stores, so Freshmart is a life-saver. Now that I got used to it, I don't feel the need to go to the grocery store anymore!
-                    
-                    <cite>
-                        <img src="resources/img/customer-1.jpg" alt=""> 
-                        Alberto Duncan
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Saving money, quick service, access to the best stores and delivered right to my home. We have lots of Online grocery marts here in Mumbai, but no one comes even close to Freshmart. Me and my family are so in love!
-                    
-                    <cite>
-                        <img src="resources/img/customer-2.jpg" alt=""> 
-                        Joana Silva
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    I was looking for a quick and easy Online Grocery Store service in Mumbai. I tried a lot of them and ended up with Freshmart. One of the best e-stores I have seen. Keep up the great work!
-                    
-                    <cite>
-                        <img src="resources/img/customer-3.jpg" alt=""> 
-                        Milton Chapman
-                    </cite>
-                </blockquote>
-            </div>
-
-        </div>
 
     </section>
 
