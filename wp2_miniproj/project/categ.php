@@ -20,15 +20,18 @@ session_start();
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
-nav{
-   background-color:#02386E;
 
-}
+    header{
+            height: 20%;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("resources/css/img/bgpages.jpg");
+
+        }
+
 
     </style>
 </head>
 <body>
-
+<header>
 <nav>
             <div class="row">
                 <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
@@ -60,6 +63,7 @@ nav{
                 </ul>
             </div>
         </nav>
+        </header>
        
 <div class="container">
 <br><br>

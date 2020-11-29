@@ -90,7 +90,8 @@ while ($row = $stmt->fetch_assoc()) {
         <img class="card-img-top" src= <?php echo "resources/img/$row[img]";?> alt="Card image" width="400px" height="200px">
         <div class="card-body">
         <h4 class="card-title"> <?php echo "$row[name]"; ?></h4>
-        <p class="card-text">Sold by: <?php echo "$row[seller]"; ?>
+        <p class="card-text">Quantity: <?php echo "$row[quantity]"; ?><br>
+        Sold by: <?php echo "$row[seller]"; ?>
         <br>
         Price: Rs. <?php echo "$row[price]"; ?>
         </p>

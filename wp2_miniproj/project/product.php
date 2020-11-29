@@ -1,19 +1,19 @@
 <?php
-//new index file
+
 session_start();
+if(count($_SESSION)>0)
+{
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freshmart</title>
-
     
     <link rel="stylesheet" href="resources/css/queries.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
 
-    
  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -42,14 +42,16 @@ session_start();
             height:100%;
             margin-right:50%;
             padding-right:40%;
-        
+            
         }
         .no-gutters{
-            margin-left:0;
+            margin-left: 0px;
+            padding-left:0px;
         }
         .card-body{
             margin-left:40%;
         }
+        
     </style> 
 </head>
 <body>
@@ -62,13 +64,13 @@ session_start();
                 <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
                 <img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black">
                 <ul class="main-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="#">How it works</a></li>
                    <?php
                         if(count($_SESSION)>0)
                         {
                             ?>
-                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
                             <li><a href="logout.php">Logout</a></li>
 
                             <?php
@@ -90,29 +92,20 @@ session_start();
 
     </header>
     <!-- FEATURES SECTION  -->
-
+    
     <section class="features js--section-features js--wp-1">
         
         <div class="row">
 
-<?php
 
-if(count($_SESSION)>0)
-                        {
-                            ?>
-                            <h2>Welcome <?php echo $_SESSION['username'];?> !</h2>
-                            <br>
-                            <?php
-                        }
-                        ?>
             
-            <p class="long-copy">
+            <h2>
 
-                Hello, we’re Freshmart, your new premium grocery delivery service. We know you’re always busy. Freshmart gives shoppers the power to make their best decision, every time, every trip.
+               We promise to find the best product for you and get it delivered at your door-step!
 
-            </p>
+            </h2>
         </div>
-<br><br><br><br>
+<br><br>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -129,36 +122,38 @@ while( $record = mysqli_fetch_array($resultset) ) {
 <center>
 
 <div class="container bcontent">
-        <hr />
-        <form method="post" action="mycart.php?action=add&id=<?php echo $record["id"]; ?>">
-        <div class="card" style="max-width: 1000px;">
-            <div class="row no-gutters">
-                <div class="col-sm-4">
-                    <img class="card-img"  alt="" src=<?php echo "resources/img/$record[img]";?>>
-                </div>
-                <div class="col-sm-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $record['name']; ?></h5>
-                        <p class="card-text">Seller:&nbsp;&nbsp;<?php echo $record['seller']; ?><br><b>Product:&nbsp;&nbsp;</b><?php echo $record['name']; ?><br><b>Category:&nbsp;&nbsp;</b><?php echo $record['category']; ?><br><b>Price:&nbsp;&nbsp;Rs. </b><?php echo $record['price']; ?></p>
-                        <div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="2" /><input type="submit" value="Add to Cart" class="btn btn-full btnAddAction" /></div>
+    
 
-                        <!-- <a href="#" class="btn btn-full">Add to Cart</a> -->
-                    </div>
-                </div>
-            </div>
-        </div>
+        <form method="post" action="mycart.php?&action=add&id=<?php echo $record["id"]; ?>">
+        <div class="card  shadow mb-4 " style="max-width: 700px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src=<?php echo "resources/img/$record[img]";?> class="card-img" alt="...">
     </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><?php echo $record['name']; ?></h5>
+        <p class="card-text">Quantity:&nbsp;&nbsp;<?php echo $record['quantity']; ?><br>Seller:&nbsp;&nbsp;<?php echo $record['seller']; ?><br>Price:&nbsp;&nbsp;Rs. </b><?php echo $record['price']; ?></p>
+        
+        <div class="cart-action"><br>
+        <label for="quantity">Enter product quantity:</label>
+        <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
+        <br><br><input type="submit" value="Add to Cart" class="btn btn-full btnAddAction" /></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </form>
+    
    
     <br><br><br>
 
 <?php }
 
 ?>
+</div>
 </center>
-<br><br><br>
-    <a href="mycart.php" class="btn btn-ghost">Cart Summary</a>
-    <a href="categ.php" class="btn btn-ghost">Shop More</a>
-    <br>
+
     </section>
 
     <footer>
@@ -207,3 +202,6 @@ while( $record = mysqli_fetch_array($resultset) ) {
 
 </html>
 
+<?php
+}
+?>
