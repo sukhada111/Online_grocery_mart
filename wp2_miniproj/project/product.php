@@ -148,7 +148,6 @@ while( $record = mysqli_fetch_array($resultset) ) {
             </div>
         </div>
     </div>
-   
     <br><br><br>
 
 <?php }
@@ -156,9 +155,8 @@ while( $record = mysqli_fetch_array($resultset) ) {
 ?>
 </center>
 <br><br><br>
-    <a href="mycart.php" class="btn btn-ghost">Cart Summary</a>
-    <a href="categ.php" class="btn btn-ghost">Shop More</a>
-    <br>
+
+
     </section>
 
     <footer>
