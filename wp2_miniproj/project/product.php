@@ -26,11 +26,29 @@ session_start();
     <link href='https://fonts.googleapis.com/css?family=Almendra' rel='stylesheet'>
     
     <style>
+       header{
+            height: 50%;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("resources/css/img/bgpages.jpg");
+
+        }
         .bcontent {
             margin-top: 10px;
         } 
         .card-text {
             font-family: 'Almendra';
+        }
+        .card-img{
+            width: 450px;
+            height:100%;
+            margin-right:50%;
+            padding-right:40%;
+        
+        }
+        .no-gutters{
+            margin-left:0;
+        }
+        .card-body{
+            margin-left:40%;
         }
     </style> 
 </head>
@@ -70,12 +88,6 @@ session_start();
             </div>
         </nav>
 
-        <div class="hero-text-box">
-
-            <h1>Compare and Find <br> your groceries at the best price. </h1>
-            <a class="btn btn-full" href="#">Order Now</a>
-            <a class="btn btn-ghost" href="#">Know More</a>
-        </div>
     </header>
     <!-- FEATURES SECTION  -->
 
@@ -113,24 +125,30 @@ $sql = "SELECT * FROM products WHERE name='$prod_name'";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
 while( $record = mysqli_fetch_array($resultset) ) {
 ?>
+
 <center>
+
 <div class="container bcontent">
         <hr />
+        <form method="post" action="mycart.php?action=add&id=<?php echo $record["id"]; ?>">
         <div class="card" style="max-width: 1000px;">
             <div class="row no-gutters">
-                <div class="col-sm-5">
-                    <img class="card-img" alt="" src=<?php echo "resources/img/$record[img]";?>>
+                <div class="col-sm-4">
+                    <img class="card-img"  alt="" src=<?php echo "resources/img/$record[img]";?>>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $record['name']; ?></h5>
                         <p class="card-text">Seller:&nbsp;&nbsp;<?php echo $record['seller']; ?><br><b>Product:&nbsp;&nbsp;</b><?php echo $record['name']; ?><br><b>Category:&nbsp;&nbsp;</b><?php echo $record['category']; ?><br><b>Price:&nbsp;&nbsp;Rs. </b><?php echo $record['price']; ?></p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="2" /><input type="submit" value="Add to Cart" class="btn btn-full btnAddAction" /></div>
+
+                        <!-- <a href="#" class="btn btn-full">Add to Cart</a> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+   
     <br><br><br>
 
 <?php }
@@ -138,14 +156,10 @@ while( $record = mysqli_fetch_array($resultset) ) {
 ?>
 </center>
 <br><br><br>
-
-
+    <a href="mycart.php" class="btn btn-ghost">Cart Summary</a>
+    <a href="categ.php" class="btn btn-ghost">Shop More</a>
+    <br>
     </section>
-
-    
-
-    
-    
 
     <footer>
         <div class="row">
