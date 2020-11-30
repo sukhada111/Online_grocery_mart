@@ -87,35 +87,39 @@ input[type=text],input[type=password], select {
 <!-- HEADER AND NAVBAR -->
 <header>
 
-    <nav>
-        <div class="row">
-            <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
-            <img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black">
-            <ul class="main-nav">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">How it works</a></li>
-                <?php
-                    if(count($_SESSION)>0)
-                    {
-                        ?>
-                        <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+<nav>
+            <div class="row">
+                <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
+                <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
+                <ul class="main-nav">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="aboutUs.php">About Us</a></li>
+                    <li><a href="categ.php">Categories</a></li>
+                   <?php
+                        if(count($_SESSION)>0)
+                        {
+                            ?>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            
+                            <li><a href="logout.php">Logout</a></li>
+                            <li><a href="myProfile.php"><i class="ion-ios-person-outline icon-small" style="color: #fff;"></i><?php echo $_SESSION["username"];?></a></li>
+                            
+                            <?php
+                        }
+                        else
+                        {
+                   ?>
+                    <li><a href="login_sess.php">Login</a></li>
+                    <li><a href="signup.php">Sign Up</a></li>
+                    <?php
+                        }
+                    ?>
+                 
 
-                        <?php
-                    }
-                    else
-                    {
-               ?>
-                <li><a href="login_sess.php">Login</a></li>
-                <li><a href="signup.php">Sign Up</a></li>
-                <?php
-                    }
-                ?>
 
-
-            </ul>
-        </div>
-    </nav>
+                </ul>
+            </div>
+        </nav>
 
     <div class="hero-text-box">
         <h1>Change Password Form</h1>
@@ -177,9 +181,9 @@ input[type=text],input[type=password], select {
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Place your order</a></li>
-                    <li><a href="#">Register now</a></li>
+                    <li><a href="aboutUs.php">About us</a></li>
+                    <li><a href="categ.php">Place your order</a></li>
+                    <li><a href="signup.php">Register now</a></li>
                     <li><a href="#">iOS app</a></li>
                     <li><a href="#">Android app</a></li>
 
@@ -201,8 +205,6 @@ input[type=text],input[type=password], select {
             </p>
         </div>
     </footer>
-
- 
 
 <!-- Js plugins -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

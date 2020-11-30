@@ -1,65 +1,92 @@
 <?php
-
 session_start();
-if(count($_SESSION)>0)
-{
 ?>
+<?php
+unset($_SESSION["cart_item"]);
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freshmart</title>
-    
+
+    <link rel="stylesheet" href="resources/css/style_index.css">
     <link rel="stylesheet" href="resources/css/queries.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
 
- 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="vendors/css/grid.css">
-    <link rel="stylesheet" href="resources/css/style_index.css">
-    <link href='https://fonts.googleapis.com/css?family=Almendra' rel='stylesheet'>
-    
     <style>
-       header{
-            height: 50%;
+        header{
+            height: 70%;
             background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("resources/css/img/bgpages.jpg");
 
         }
-        .bcontent {
-            margin-top: 10px;
-        } 
-        .card-text {
-            font-family: 'Almendra';
+        ;.hero-text-box{
+            align-items: center;
         }
-        .card-img{
-            width: 450px;
-            height:100%;
-            margin-right:50%;
-            padding-right:40%;
-            
+        h1{
+            font-weight: 400;
+            font-size: 300%;
         }
-        .no-gutters{
-            margin-left: 0px;
-            padding-left:0px;
+
+        .container{
+            margin-left: 40%;
+            margin-bottom:7%;
+            margin-top:1%;
         }
-        .card-body{
-            margin-left:40%;
-        }
-        
-    </style> 
+        .column-card {
+  float: left;
+  width: 33.33%;
+  padding: 0 2%;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row-card {
+    margin-left:10%;
+    margin-right:10%;
+margin-bottom:5%;
+}
+
+/* Clear floats after the columns */
+.row-card:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column-card {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #fff;
+}
+.card-text{
+    margin-bottom:5px;
+}
+     
+    </style>
+
+  
 </head>
 <body>
+<!-- HEADER AND NAVBAR -->
+<header>
 
-    <!-- HEADER AND NAVBAR -->
-    <header>
-
-    <nav>
+<nav>
             <div class="row">
                 <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
                 <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
@@ -93,75 +120,49 @@ if(count($_SESSION)>0)
             </div>
         </nav>
 
-    </header>
-    <!-- FEATURES SECTION  -->
-    
-    <section class="features js--section-features js--wp-1">
-        
-        <div class="row">
 
+<div class="hero-text-box">
 
-            
-            <h2>
-
-               We promise to find the best product for you and get it delivered at your door-step!
-
-            </h2>
-        </div>
-<br><br>
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wp_freshmart";
-$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
-
-$prod_name=$_GET['pro'];
-$sql = "SELECT * FROM products WHERE name='$prod_name'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-while( $record = mysqli_fetch_array($resultset) ) {
-?>
-
-<center>
-
-<div class="container bcontent">
-    
-
-        <form method="post" action="mycart.php?&action=add&id=<?php echo $record["id"]; ?>">
-        <div class="card  shadow mb-4 " style="max-width: 700px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src=<?php echo "resources/img/$record[img]";?> class="card-img" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $record['name']; ?></h5>
-        <p class="card-text">Quantity:&nbsp;&nbsp;<?php echo $record['quantity']; ?><br>Seller:&nbsp;&nbsp;<?php echo $record['seller']; ?><br>Price:&nbsp;&nbsp;Rs. </b><?php echo $record['price']; ?></p>
-        
-        <div class="cart-action"><br>
-        <label for="quantity">Enter product quantity:</label>
-        <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
-        <br><br><input type="submit" value="Add to Cart" class="btn btn-full btnAddAction" /></div>
-      </div>
-    </div>
-
-  </div>
-  </div>
-  </form>
-    
-   
-    <br><br><br>
-
-<?php }
-
-?>
+<h1>Order Successful!</h1>
 </div>
-</center>
-<br><br><br>
+</header>
 
-    </section>
+       
+   <h2 style='margin-top:2%;'>Thank You for Shopping! Hoping to see you again soon.</h2>
+    <img src="resources/img/tenor.gif" alt="" style="margin-left:35%">
 
-    <footer>
+<div class="container">
+</div>
+
+
+<div class="row-card">
+  <div class="column-card">
+    <div class="card">
+    <img src="resources/img/categ.png" alt="" style="width:100%">
+      <p class="card-text">Shop according to categories and buy the products at their best prices.</p>
+      <a class="btn btn-ghost" href="categ.php">Shop by Category</a>
+    </div>
+  </div>
+
+   <div class="column-card">
+    <div class="card">
+    <img src="resources/img/card4.jpg" alt="" style="width:100%">
+      <p class="card-text">Find out more about Freshmart and how we work.</p>
+      <a class="btn btn-ghost" href="aboutUs.php">How It Works</a>
+    </div>
+  </div>
+  <div class="column-card">
+    <div class="card">
+    <img src="resources/img/card3.jpg" alt="" style="width:100%">
+      <p class="card-text">Checkout our E-Grocery Mart and what our clients think about us.</p>
+      <a class="btn btn-ghost" href="index.php">Explore</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+<footer>
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
@@ -190,8 +191,6 @@ while( $record = mysqli_fetch_array($resultset) ) {
         </div>
     </footer>
 
-
-
 <!-- Js plugins -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -203,10 +202,4 @@ while( $record = mysqli_fetch_array($resultset) ) {
 
 
 
-</body>
-
 </html>
-
-<?php
-}
-?>

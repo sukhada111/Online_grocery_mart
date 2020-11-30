@@ -28,19 +28,20 @@ session_start();
 
         <nav>
             <div class="row">
-                <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
-                <img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black">
+                <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
+                <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
                 <ul class="main-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">How it works</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="aboutUs.php">About Us</a></li>
+                    <li><a href="categ.php">Categories</a></li>
                    <?php
                         if(count($_SESSION)>0)
                         {
                             ?>
-                            <li><a href="change_pass.php">Change password</a></li>
-                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
                             
                             <li><a href="logout.php">Logout</a></li>
+                            <li><a href="myProfile.php"><i class="ion-ios-person-outline icon-small" style="color: #fff;"></i><?php echo $_SESSION["username"];?></a></li>
                             
                             <?php
                         }
@@ -63,7 +64,7 @@ session_start();
 
             <h1>Compare and Find <br> your groceries at the best price. </h1>
             <a class="btn btn-full" href="categ.php">Order Now</a>
-            <a class="btn btn-ghost" href="#">Know More</a>
+            <a class="btn btn-ghost" href="aboutUs.php">Know More</a>
         </div>
     </header>
     <!-- FEATURES SECTION  -->
@@ -188,7 +189,6 @@ if(count($_SESSION)>0)
         </div>
 
     </section>
-
     
 
     
@@ -198,9 +198,9 @@ if(count($_SESSION)>0)
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Place your order</a></li>
-                    <li><a href="#">Register now</a></li>
+                    <li><a href="aboutUs.php">About us</a></li>
+                    <li><a href="categ.php">Place your order</a></li>
+                    <li><a href="signup.php">Register now</a></li>
                     <li><a href="#">iOS app</a></li>
                     <li><a href="#">Android app</a></li>
 

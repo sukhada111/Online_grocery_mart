@@ -1,109 +1,203 @@
-<html>
-<head>
-<head>
-    <body>
 <?php
-// require_once("product.php");
-require_once("dbController.php");
-$db_handle = new DBController();
-$_SESSION["cart_item"]=array();
-if(!empty($_GET["action"])) {
-switch($_GET["action"]) {
-	case "add":
-		if(!empty($_POST["quantity"])) {
-			$productByCode = $db_handle->runQuery("SELECT * FROM products WHERE id='" . $_GET["id"] . "'");
-			$itemArray = array($productByCode[0]["id"]=>array('name'=>$productByCode[0]["name"],'price'=>$productByCode[0]["price"], 'seller'=>$productByCode[0]["seller"], 'quantity'=>$_POST["quantity"],'img'=>$productByCode[0]["img"]));
+session_start();?>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freshmart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="resources/css/queries.css">
+    <link rel="stylesheet" href="vendors/css/normalize.css">
+    <link rel="stylesheet" href="vendors/css/ionicons.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="vendors/css/grid.css">
+    <link rel="stylesheet" href="resources/css/style_index.css">
+    <style>
+    .card:hover{
+     transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+
+    header{
+            height: 20%;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("resources/css/img/bgpages.jpg");
+
+		}
+		.table-data{
+			border:1px solid #333;
+			margin-left:10%;
+			margin-bottom:7%;
 			
-			if(!empty($_SESSION["cart_item"])) {
-				if(in_array($productByCode[0]["id"],array_keys($_SESSION["cart_item"]))) {
-					foreach($_SESSION["cart_item"] as $k => $v) {
-							if($productByCode[0]["id"] == $k) {
-								if(empty($_SESSION["cart_item"][$k]["quantity"])) {
-									$_SESSION["cart_item"][$k]["quantity"] = 0;
-								}
-								$_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
-							}
-					}
-				} else {
-					$_SESSION["cart_item"] = array_push($_SESSION["cart_item"],$itemArray);
-				}
-			} else {
-				$_SESSION["cart_item"] = $itemArray;
-			}
 		}
-	break;
-	case "remove":
-		if(!empty($_SESSION["cart_item"])) {
-			foreach($_SESSION["cart_item"] as $k => $v) {
-					if($_GET["id"] == $k)
-						unset($_SESSION["cart_item"][$k]);				
-					if(empty($_SESSION["cart_item"]))
-						unset($_SESSION["cart_item"]);
-			}
+		th,td{
+			padding:2%;
 		}
-	break;
-	case "empty":
-		unset($_SESSION["cart_item"]);
-	break;	
-}
-}
-?>
+
+
+    </style>
+</head>
+<body>
+<header>
+<nav>
+            <div class="row">
+                <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
+                <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
+                <ul class="main-nav">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="aboutUs.php">About Us</a></li>
+                    <li><a href="categ.php">Categories</a></li>
+                   <?php
+                        if(count($_SESSION)>0)
+                        {
+                            ?>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            
+                            <li><a href="logout.php">Logout</a></li>
+                            <li><a href="myProfile.php"><i class="ion-ios-person-outline icon-small" style="color: #fff;"></i><?php echo $_SESSION["username"];?></a></li>
+                            
+                            <?php
+                        }
+                        else
+                        {
+                   ?>
+                    <li><a href="login_sess.php">Login</a></li>
+                    <li><a href="signup.php">Sign Up</a></li>
+                    <?php
+                        }
+                    ?>
+                 
+
+
+                </ul>
+            </div>
+        </nav>
+
+        </header>
+<div class="container">
+<br><br>
+<h2>Cart Summary</h2>
+<br>
+<br>
 <?php
-if(isset($_SESSION["cart_item"])){
-    $total_quantity = 0;
-    $total_price = 0;
-?>
-<table class="tbl-cart" cellpadding="10" cellspacing="1">
-<tbody>
-<tr>
-<th style="text-align:left;"width="20%">Name</th>
-<th style="text-align:right;" width="5%">Quantity</th>
-<th style="text-align:right;" width="10%">Price</th>
-<th style="text-align:right;" width="10%">Seller</th>
-<th style="text-align:right;" width="10%">Total</th>
-<th style="text-align:center;" width="5%">Remove</th>
-</tr>	
-<?php		
-    foreach ($_SESSION["cart_item"] as $item){
-        $item_price = $item["quantity"]*$item["price"];
-		?>
-				<tr>
-				<td><img src="<?php echo $item["img"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
-				<td style="text-align:right;"><?php echo $item["quantity"]; ?></td>
-				<td  style="text-align:right;"><?php echo "$ ".$item["price"]; ?></td>
-                <td  style="text-align:right;"><?php echo "".$item["seller"]; ?></td>
-				<td  style="text-align:right;"><?php echo "$ ". number_format($item_price,2); ?></td>
-				<td style="text-align:center;"><a href="mycart.php?action=remove&id=<?php echo $item["id"]; ?>" class="btnRemoveAction"><img src="resources/img/icon-delete.png" alt="Remove Item" /></a></td>
-				</tr>
-				<?php
-				$total_quantity += $item["quantity"];
-				$total_price += ($item["price"]*$item["quantity"]);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "wp_freshmart";
+$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
+
+
+if(isset($_GET['id'])){
+$id=$_GET['id'];
+}
+if(isset($_GET['action'])){
+	$action=$_GET['action'];
+
+if($action=='add'){
+
+			if(!isset($_SESSION['cart_item'])){
+				$_SESSION['cart_item']=array();
+				array_push($_SESSION['cart_item'],$id);
+			}
+			else
+			{
+				if(!in_array($id,$_SESSION['cart_item'])){
+					array_push($_SESSION['cart_item'],$id);
+				}
+			
+			}
+}
+if($action=='remove'){
+	if(!empty($_SESSION["cart_item"])) {
+		$del=array_search($id,$_SESSION["cart_item"],true);
+		unset($_SESSION["cart_item"][$del]);
+		if(empty($_SESSION["cart_item"])){
+			unset($_SESSION["cart_item"]);
 		}
-		?>
-
-<tr>
-<td colspan="2" align="right">Total:</td>
-<td align="right"><?php echo $total_quantity; ?></td>
-<td align="right" colspan="2"><strong><?php echo "$ ".number_format($total_price, 2); ?></strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>	
-<br><br><br>
-    <a href="mycart.php" class="btn btn-ghost">Cart Summary</a>
-    <a href="categ.php" class="btn btn-ghost">Shop More</a>
-    <br>	
-  <?php
+	}
 }
-else {
+}
+
+if(isset($_SESSION["cart_item"])){
 ?>
-<div class="no-records">Your Cart is Empty</div>
+<table class='table-data' border=1px>
+	<tr>
+	<th>Name</th>
+	<th>Seller</th>
+	<th>Quantity</th>
+	<th>Price</th>
+	<th>Remove Product</th>
+	</tr>
+
 <?php 
+	foreach($_SESSION['cart_item'] as $item){
+	$sql="SELECT * FROM products WHERE id='$item'";
+	$result = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+	$record = mysqli_fetch_array($result);
+	
+	echo "
+	<tr>
+	<td width=15%>
+	".$record["name"];?>
+	<img src=<?php echo "resources/img/$record[img]";?> width=50% height=30%>
+	<?php
+	echo"</td>"."<td width=10%>".$record["seller"]."</td>"
+	."<td width=5%>".$record["quantity"]."</td>"
+	."<td width=5%>".$record["price"]."</td>"."<td width=5% style='text-align:center;'>";?>
+	<a href="mycart.php?&action=remove&id=<?php echo $record["id"]; ?>"><img src="resources/css/img/icon-delete.png"></a>
+	<?php
+	echo "</td></tr>";
 }
 ?>
-  
+</table>
+
+<?php
+echo "<a class='btn btn-ghost' href='categ.php' style='margin-left:20%; margin-bottom:5%;'>Shop More</a>";
+echo "<a class='btn btn-full' href='checkout.php' style='margin-left:2%; margin-bottom:5%'>Proceed to checkout</a>";
+
+}
+else{
+	echo "<h2>Your Cart is Empty</h2>";
+}
+
+?>
 
 
+
+
+</div>
+<footer>
+        <div class="row">
+            <div class="col span-1-of-2">
+                <ul class="footer-nav">
+                    <li><a href="aboutUs.php">About us</a></li>
+                    <li><a href="categ.php">Place your order</a></li>
+                    <li><a href="signup.php">Register now</a></li>
+                    <li><a href="#">iOS app</a></li>
+                    <li><a href="#">Android app</a></li>
+
+                </ul>
+            </div>
+            <div class="col span-1-of-2">
+                <ul class="social-links">
+                    <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                    <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                    <li><a href="#"><i class="ion-social-instagram"></i></a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                Copyright &copy; 2015 by Freshmart. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+ 
 
 <!-- Js plugins -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -113,5 +207,10 @@ else {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>
 <script src="vendors/js/jquery.waypoints.min.js"></script>
 <script src="resources/Js/script.js"></script>
+
+
+
 </body>
+
 </html>
+

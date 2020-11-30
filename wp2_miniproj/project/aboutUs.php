@@ -1,60 +1,111 @@
 <?php
-
 session_start();
-if(count($_SESSION)>0)
-{
 ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freshmart</title>
-    
+
+    <link rel="stylesheet" href="resources/css/style_index.css">
     <link rel="stylesheet" href="resources/css/queries.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
-    <link rel="stylesheet" href="vendors/css/ionicons.min.css">
-
- 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="vendors/css/ionicons.min.css">    
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/grid.css">
-    <link rel="stylesheet" href="resources/css/style_index.css">
-    <link href='https://fonts.googleapis.com/css?family=Almendra' rel='stylesheet'>
-    
     <style>
-       header{
-            height: 50%;
+        header{
+            height: 70%;
             background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("resources/css/img/bgpages.jpg");
 
         }
-        .bcontent {
+        ;.hero-text-box{
+            align-items: center;
+        }
+        h1{
+            font-weight: 400;
+            font-size: 300%;
+        }
+     
+        label{
             margin-top: 10px;
-        } 
-        .card-text {
-            font-family: 'Almendra';
+            font-weight: 400;
         }
-        .card-img{
-            width: 450px;
-            height:100%;
-            margin-right:50%;
-            padding-right:40%;
-            
+        input[type=submit] {
+            background-color: #2980b9;
+            color: #fff;
+            border: 1px solid #2980b9;
+            margin-right: 15px;
+
         }
-        .no-gutters{
-            margin-left: 0px;
-            padding-left:0px;
+        input,select,textarea{
+            margin-top:10px;
         }
-        .card-body{
-            margin-left:40%;
+        input[type=submit]:hover,
+        input[type=submit]:active{
+            background-color: #1d5a82;
+            border: 1px solid #1d5a82;
+
         }
-        
-    </style> 
+        .error{
+            color:red;
+        }
+        .rating {
+      overflow: hidden;
+      display: inline-block;
+  }
+  .rating-input {
+      float: right;
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      margin: 0 0 0 -16px;
+      opacity: 0;
+  }
+
+.rating:hover .rating-star:hover,
+  .rating:hover .rating-star:hover ~ .rating-star,
+  .rating-input:checked ~ .rating-star {
+      background-position: 0 0;
+  }
+
+   .rating-star,
+  .rating:hover .rating-star {
+    position: relative;
+      display: block;
+    float: right;
+      width: 16px;
+      height: 16px;
+      background: url('https://www.everythingfrontend.com/samples/star-rating/star.png') 0 -16px;
+  }
+
+  img{
+      border-radius:50%;
+      margin-bottom:5%;
+      margin-right:5%;
+  }
+  td{
+      width:33.3%;
+  }
+  .rounded-circle:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+}
+    
+    </style>
+
+  
 </head>
 <body>
+      
+    
 
     <!-- HEADER AND NAVBAR -->
     <header>
@@ -92,74 +143,34 @@ if(count($_SESSION)>0)
                 </ul>
             </div>
         </nav>
+        <div class="hero-text-box">
 
-    </header>
-    <!-- FEATURES SECTION  -->
-    
-    <section class="features js--section-features js--wp-1">
-        
-        <div class="row">
-
-
-            
-            <h2>
-
-               We promise to find the best product for you and get it delivered at your door-step!
-
-            </h2>
+        <h1>About Us</h1>
         </div>
-<br><br>
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wp_freshmart";
-$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
+    </header>
 
-$prod_name=$_GET['pro'];
-$sql = "SELECT * FROM products WHERE name='$prod_name'";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-while( $record = mysqli_fetch_array($resultset) ) {
-?>
-
-<center>
-
-<div class="container bcontent">
-    
-
-        <form method="post" action="mycart.php?&action=add&id=<?php echo $record["id"]; ?>">
-        <div class="card  shadow mb-4 " style="max-width: 700px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src=<?php echo "resources/img/$record[img]";?> class="card-img" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $record['name']; ?></h5>
-        <p class="card-text">Quantity:&nbsp;&nbsp;<?php echo $record['quantity']; ?><br>Seller:&nbsp;&nbsp;<?php echo $record['seller']; ?><br>Price:&nbsp;&nbsp;Rs. </b><?php echo $record['price']; ?></p>
-        
-        <div class="cart-action"><br>
-        <label for="quantity">Enter product quantity:</label>
-        <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
-        <br><br><input type="submit" value="Add to Cart" class="btn btn-full btnAddAction" /></div>
-      </div>
-    </div>
-
-  </div>
-  </div>
-  </form>
-    
    
-    <br><br><br>
-
-<?php }
-
-?>
-</div>
-</center>
-<br><br><br>
-
-    </section>
+    <!-- ABOUT section -->
+    <h2 style='margin-top:2%;'>Freshmart: A perfect place for your Grocery Shopping</h2>
+    <p class="long-copy">
+    Hello There!<br>
+    Welcome to Freshmart. Freshmart was established in the year 2015 and we came up with the name "Freshmart" because we ensure that
+    our customers get 100% fresh products and at the best price available. Freshmart is different from other Grocery Stores as we allow our customers
+    to view the different prices at which any particular product is sold by various Wholesalers. The customer can select a particular item at the price 
+    they want to. By this, we connect the different Wholesalers directly to the customers without the involvement of middlemen. We proudly claim that Freshmart
+    maintains maximum transparency with our customers. We hope you have a good experience with us!<br>
+    <br>
+    Regards<br>
+    Team Freshmart
+    </p>
+    <h2 style='margin-top:2%;'>Our Team</h2>
+    <div class="row">
+    <div class="container" style="margin-left:13%">
+    <img src="resources/img/Rhutuja.jpg" class="rounded-circle"  width="254" height="250">
+    <img src="resources/img/sukhada.jpg" class="rounded-circle"  width="254" height="250">
+    <img src="resources/img/Aiswarya.jpg" class="rounded-circle"  width="254" height="250"> 
+    </div>
+    </div>
 
     <footer>
         <div class="row">
@@ -189,8 +200,7 @@ while( $record = mysqli_fetch_array($resultset) ) {
             </p>
         </div>
     </footer>
-
-
+ 
 
 <!-- Js plugins -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -207,6 +217,3 @@ while( $record = mysqli_fetch_array($resultset) ) {
 
 </html>
 
-<?php
-}
-?>

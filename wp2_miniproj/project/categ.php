@@ -20,30 +20,35 @@ session_start();
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
-nav{
-   background-color:#02386E;
 
-}
+    header{
+            height: 20%;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("resources/css/img/bgpages.jpg");
+
+        }
+
 
     </style>
 </head>
 <body>
-
+<header>
 <nav>
             <div class="row">
-                <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
-                <img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black">
+                <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
+                <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
                 <ul class="main-nav">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="#">How it works</a></li>
+                    <li><a href="aboutUs.php">About Us</a></li>
+                    <li><a href="categ.php">Categories</a></li>
                    <?php
                         if(count($_SESSION)>0)
                         {
                             ?>
-                            <li><a href="categ.php">Categories</a></li>
-                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            
                             <li><a href="logout.php">Logout</a></li>
-
+                            <li><a href="myProfile.php"><i class="ion-ios-person-outline icon-small" style="color: #fff;"></i><?php echo $_SESSION["username"];?></a></li>
+                            
                             <?php
                         }
                         else
@@ -60,6 +65,7 @@ nav{
                 </ul>
             </div>
         </nav>
+        </header>
        
 <div class="container">
 <br><br>
@@ -110,9 +116,9 @@ nav{
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Place your order</a></li>
-                    <li><a href="#">Register now</a></li>
+                    <li><a href="aboutUs.php">About us</a></li>
+                    <li><a href="categ.php">Place your order</a></li>
+                    <li><a href="signup.php">Register now</a></li>
                     <li><a href="#">iOS app</a></li>
                     <li><a href="#">Android app</a></li>
 

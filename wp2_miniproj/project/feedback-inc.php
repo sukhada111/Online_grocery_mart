@@ -8,7 +8,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freshmart</title>
 
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/style_index.css">
     <link rel="stylesheet" href="resources/css/queries.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
@@ -84,20 +84,39 @@ margin-bottom:5%;
 <header>
 
 <nav>
-    <div class="row">
-        <img src="resources/img/logo-white.png" alt="Freshmart Logo" class="logo">
-        <img src="resources/img/logo-black.png" alt="Freshmart logo" class="logo-black">
-        <ul class="main-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Sign Up</a></li>
-            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+            <div class="row">
+                <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
+                <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
+                <ul class="main-nav">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="aboutUs.php">About Us</a></li>
+                    <li><a href="categ.php">Categories</a></li>
+                   <?php
+                        if(count($_SESSION)>0)
+                        {
+                            ?>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            
+                            <li><a href="logout.php">Logout</a></li>
+                            <li><a href="myProfile.php"><i class="ion-ios-person-outline icon-small" style="color: #fff;"></i><?php echo $_SESSION["username"];?></a></li>
+                            
+                            <?php
+                        }
+                        else
+                        {
+                   ?>
+                    <li><a href="login_sess.php">Login</a></li>
+                    <li><a href="signup.php">Sign Up</a></li>
+                    <?php
+                        }
+                    ?>
+                 
 
 
-        </ul>
-    </div>
-</nav>
+                </ul>
+            </div>
+        </nav>
+
 
 <div class="hero-text-box">
 
@@ -123,8 +142,6 @@ margin-bottom:5%;
 ?>
 
 <div class="container">
-<a class="btn btn-full" href="#">Shop More</a>
-<a class="btn btn-ghost" href="feededit.php">Edit About Us</a>
 </div>
 
 
@@ -133,22 +150,22 @@ margin-bottom:5%;
     <div class="card">
     <img src="resources/img/categ.png" alt="" style="width:100%">
       <p class="card-text">Shop according to categories and buy the products at their best prices.</p>
-      <a class="btn btn-ghost" href="#">Shop by Category</a>
+      <a class="btn btn-ghost" href="categ.php">Shop by Category</a>
     </div>
   </div>
 
    <div class="column-card">
     <div class="card">
-    <img src="resources/img/categ.png" alt="" style="width:100%">
-      <p class="card-text">Shop according to categories and buy the products at their best prices.</p>
-      <a class="btn btn-ghost" href="#">Shop by Category</a>
+    <img src="resources/img/card4.png" alt="" style="width:100%">
+      <p class="card-text">Find out more about Freshmart and how we work.</p>
+      <a class="btn btn-ghost" href="aboutUs.php">How It Works</a>
     </div>
   </div>
   <div class="column-card">
     <div class="card">
-    <img src="resources/img/categ.png" alt="" style="width:100%">
-      <p class="card-text">Shop according to categories and buy the products at their best prices.</p>
-      <a class="btn btn-ghost" href="#">Shop by Category</a>
+    <img src="resources/img/card3.png" alt="" style="width:100%">
+      <p class="card-text">Checkout our E-Grocery Mart and what our clients think about us.</p>
+      <a class="btn btn-ghost" href="index.php">Explore</a>
     </div>
   </div>
 
@@ -159,9 +176,9 @@ margin-bottom:5%;
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Place your order</a></li>
-                    <li><a href="#">Register now</a></li>
+                    <li><a href="aboutUs.php">About us</a></li>
+                    <li><a href="categ.php">Place your order</a></li>
+                    <li><a href="signup.php">Register now</a></li>
                     <li><a href="#">iOS app</a></li>
                     <li><a href="#">Android app</a></li>
 

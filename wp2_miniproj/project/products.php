@@ -37,19 +37,21 @@ header{
 <header>
 <nav>
             <div class="row">
-                <img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo">
-                <img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black">
+                <a href="index.php"><img src="resources/img/logo-white.png" alt="Omnifood Logo" class="logo"></a>
+                <a href="index.php"><img src="resources/img/logo-black.png" alt="Omnifood logo" class="logo-black"></a>
                 <ul class="main-nav">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="#">How it works</a></li>
+                    <li><a href="aboutUs.php">About Us</a></li>
+                    <li><a href="categ.php">Categories</a></li>
                    <?php
                         if(count($_SESSION)>0)
                         {
                             ?>
-                            <li><a href="categ.php">Categories</a></li>
-                            <li><a href="#"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            <li><a href="mycart.php"><i class="ion-ios-cart-outline icon-small" style="color: #fff;"></i>My Cart</a></li>
+                            
                             <li><a href="logout.php">Logout</a></li>
-
+                            <li><a href="myProfile.php"><i class="ion-ios-person-outline icon-small" style="color: #fff;"></i><?php echo $_SESSION["username"];?></a></li>
+                            
                             <?php
                         }
                         else
@@ -60,10 +62,13 @@ header{
                     <?php
                         }
                     ?>
-                
+                 
+
+
                 </ul>
             </div>
         </nav>
+
        </header>
 <div class="container">
 <br><br>
@@ -90,7 +95,8 @@ while ($row = $stmt->fetch_assoc()) {
         <img class="card-img-top" src= <?php echo "resources/img/$row[img]";?> alt="Card image" width="400px" height="200px">
         <div class="card-body">
         <h4 class="card-title"> <?php echo "$row[name]"; ?></h4>
-        <p class="card-text">Sold by: <?php echo "$row[seller]"; ?>
+        <p class="card-text">Quantity: <?php echo "$row[quantity]"; ?><br>
+        Sold by: <?php echo "$row[seller]"; ?>
         <br>
         Price: Rs. <?php echo "$row[price]"; ?>
         </p>
@@ -116,13 +122,13 @@ echo $connection->error;
      </div>  
    
 
-    <footer>
+     <footer>
         <div class="row">
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Place your order</a></li>
-                    <li><a href="#">Register now</a></li>
+                    <li><a href="aboutUs.php">About us</a></li>
+                    <li><a href="categ.php">Place your order</a></li>
+                    <li><a href="signup.php">Register now</a></li>
                     <li><a href="#">iOS app</a></li>
                     <li><a href="#">Android app</a></li>
 
