@@ -2,6 +2,39 @@
 session_start();
 ?>
 <?php
+
+
+$dbHost = "localhost";
+$dbUser = "root";
+$dbPass = "";
+$dbName = "wp_freshmart";
+
+$conn = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
+
+if(!$conn){
+    die('Database Connection failed!');
+}
+foreach($_SESSION['cart_item'] as $item){
+	$sql="SELECT * FROM products WHERE id='$item'";
+	$result = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+  $record = mysqli_fetch_array($result);
+
+
+$uname=$_SESSION["username"];
+$prodid=$record["id"];
+$prodname = $record["name"];
+$cat = $record["category"];
+$sel = $record["seller"];
+$qua = $record["quantity"];
+$price = $record["price"];
+
+
+
+$sqlin = "INSERT into orders (order_id,username,name,category,seller,quantity,price) VALUES ('$prodid','$uname','$prodname','$cat','$sel','$qua','$price')";
+$new = mysqli_query($conn,$sqlin);        
+
+}
+
 unset($_SESSION["cart_item"]);
 ?>
 

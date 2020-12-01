@@ -183,10 +183,7 @@ $record = mysqli_fetch_array($result);
 echo "<strong>Email ID: </strong>". $record['email']."<br><br>";
 echo "<strong>Address: </strong>". $record['address']."<br><br>";
 
-
 ?>
-
-
     </div>
     
     </div>

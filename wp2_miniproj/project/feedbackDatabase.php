@@ -5,7 +5,7 @@
     $dbHost = "localhost";
     $dbUser = "root";
     $dbPass = "";
-    $dbName = "feedback";
+    $dbName = "wp_freshmart";
 
     $conn = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
 
