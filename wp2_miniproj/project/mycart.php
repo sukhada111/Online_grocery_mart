@@ -89,30 +89,41 @@ $dbname = "wp_freshmart";
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
 
-if(isset($_GET['id'])){
-$id=$_GET['id'];
-}
 if(isset($_GET['action'])){
 	$action=$_GET['action'];
 
 if($action=='add'){
+    function array_push_assoc($array, $key, $value){
+        $array[$key] = $value;
+        return $array;
+     }
+if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    }
+            $quant=$_POST['quantity'];
 
 			if(!isset($_SESSION['cart_item'])){
-				$_SESSION['cart_item']=array();
-				array_push($_SESSION['cart_item'],$id);
+            $_SESSION['cart_item']=array();
+          
+         $_SESSION['cart_item']=array_push_assoc($_SESSION['cart_item'], $id, $quant);
+
 			}
 			else
 			{
 				if(!in_array($id,$_SESSION['cart_item'])){
-					array_push($_SESSION['cart_item'],$id);
+                    $quant=$_POST['quantity'];
+                    
+                    $_SESSION['cart_item']=array_push_assoc($_SESSION['cart_item'],$id,$quant);
 				}
 			
 			}
 }
 if($action=='remove'){
+    $id=$_GET['id'];
 	if(!empty($_SESSION["cart_item"])) {
-		$del=array_search($id,$_SESSION["cart_item"],true);
-		unset($_SESSION["cart_item"][$del]);
+       
+       
+		unset($_SESSION["cart_item"][$id]);
 		if(empty($_SESSION["cart_item"])){
 			unset($_SESSION["cart_item"]);
 		}
@@ -127,32 +138,44 @@ if(isset($_SESSION["cart_item"])){
 	<th>Name</th>
 	<th>Seller</th>
 	<th>Quantity</th>
-	<th>Price</th>
+	<th>Price (Rs.)</th>
+    <th>Product count</th>
+    <th>Total price (Rs.)</th>
 	<th>Remove Product</th>
 	</tr>
 
 <?php 
-	foreach($_SESSION['cart_item'] as $item){
-	$sql="SELECT * FROM products WHERE id='$item'";
+    $total_price=array();
+	foreach($_SESSION['cart_item'] as $x => $quant){
+	$sql="SELECT * FROM products WHERE id='$x'";
 	$result = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-	$record = mysqli_fetch_array($result);
-	
+    $record = mysqli_fetch_array($result);
+    $price= $quant*($record['price']);
+    array_push($total_price,$price);
+    
 	echo "
 	<tr>
-	<td width=15%>
-	".$record["name"];?>
+	<td width=15%>".$record["name"];?>
 	<img src=<?php echo "resources/img/$record[img]";?> width=50% height=30%>
 	<?php
 	echo"</td>"."<td width=10%>".$record["seller"]."</td>"
-	."<td width=5%>".$record["quantity"]."</td>"
-	."<td width=5%>".$record["price"]."</td>"."<td width=5% style='text-align:center;'>";?>
+    ."<td width=5%>".$record["quantity"]."</td>"
+    
+    ."<td width=5%>".$record["price"]."</td>".
+    "<td width=5%>".$quant."</td>"
+    ."<td width=5%>".$quant*$record['price']."</td>"
+    ."<td width=5% style='text-align:center;'>" ;?>
 	<a href="mycart.php?&action=remove&id=<?php echo $record["id"]; ?>"><img src="resources/css/img/icon-delete.png"></a>
 	<?php
 	echo "</td></tr>";
 }
 ?>
 </table>
-
+<br>
+<?php
+$sum=array_sum($total_price);
+?>
+<br><h2>Cart total: Rs. <?php echo "$sum"; ?></h2>
 <?php
 echo "<a class='btn btn-ghost' href='categ.php' style='margin-left:20%; margin-bottom:5%;'>Shop More</a>";
 echo "<a class='btn btn-full' href='checkout.php' style='margin-left:2%; margin-bottom:5%'>Proceed to checkout</a>";
