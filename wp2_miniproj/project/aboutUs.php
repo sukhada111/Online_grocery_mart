@@ -151,14 +151,14 @@ session_start();
 
    
     <!-- ABOUT section -->
-    <h2 style='margin-top:2%;'>Freshmart: A perfect place for your Grocery Shopping</h2>
+    <h2 style='margin-top:2%;'><br>The perfect place for Grocery Shopping</h2>
     <p class="long-copy">
     Hello There!<br>
-    Welcome to Freshmart. Freshmart was established in the year 2015 and we came up with the name "Freshmart" because we ensure that
-    our customers get 100% fresh products and at the best price available. Freshmart is different from other Grocery Stores as we allow our customers
-    to view the different prices at which any particular product is sold by various Wholesalers. The customer can select a particular item at the price 
-    they want to. By this, we connect the different Wholesalers directly to the customers without the involvement of middlemen. We proudly claim that Freshmart
-    maintains maximum transparency with our customers. We hope you have a good experience with us!<br>
+    Welcome to Freshmart. Freshmart was established in the year 2015 and we ensure that our customers get the freshest products at the best price available, hence the name. 
+    Our aim is to redefine the freshest and finest food experience for our customers. Freshmart is different from the others as customers can view the various prices a product
+    is sold at by different wholesalers. You can instantly see which wholesalers have your favourite products and choose one that suits you the best. Thereby, we connect 
+    wholesalers directly to customers without the involvement of middlemen. We proudly claim that Freshmart
+    maintains maximum transparency with its customers. <br>Happy Shopping!<br>
     <br>
     Regards<br>
     Team Freshmart
