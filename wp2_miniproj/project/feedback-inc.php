@@ -156,16 +156,16 @@ margin-bottom:5%;
 
    <div class="column-card">
     <div class="card">
-    <img src="resources/img/card4.png" alt="" style="width:100%">
+    <img src="resources/img/card4.jpg" alt="" style="width:100%">
       <p class="card-text">Find out more about Freshmart and how we work.</p>
       <a class="btn btn-ghost" href="aboutUs.php">How It Works</a>
     </div>
   </div>
   <div class="column-card">
     <div class="card">
-    <img src="resources/img/card3.png" alt="" style="width:100%">
-      <p class="card-text">Checkout our E-Grocery Mart and what our clients think about us.</p>
-      <a class="btn btn-ghost" href="index.php">Explore</a>
+    <img src="resources/img/card3.jpg" alt="" style="width:100%">
+      <p class="card-text">Tell us what you think about us and what we need to improve.</p>
+      <a class="btn btn-ghost" href="feedback.php">Feedback</a>
     </div>
   </div>
 

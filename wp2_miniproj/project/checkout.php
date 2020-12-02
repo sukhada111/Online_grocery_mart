@@ -30,7 +30,7 @@ $price = $record["price"];
 
 
 
-$sqlin = "INSERT into orders (order_id,username,name,category,seller,quantity,price) VALUES ('$prodid','$uname','$prodname','$cat','$sel','$qua','$price')";
+$sqlin = "INSERT into orders(order_id,username,name,category,seller,quantity,price) VALUES ('$prodid','$uname','$prodname','$cat','$sel','$qua','$price')";
 $new = mysqli_query($conn,$sqlin);        
 
 }
@@ -187,8 +187,8 @@ margin-bottom:5%;
   <div class="column-card">
     <div class="card">
     <img src="resources/img/card3.jpg" alt="" style="width:100%">
-      <p class="card-text">Checkout our E-Grocery Mart and what our clients think about us.</p>
-      <a class="btn btn-ghost" href="index.php">Explore</a>
+      <p class="card-text">Tell us what you think about us and what we need to improve.</p>
+      <a class="btn btn-ghost" href="feedback.php">Feedback</a>
     </div>
   </div>
 
