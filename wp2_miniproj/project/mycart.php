@@ -125,13 +125,16 @@ if($action=='remove'){
        
 		unset($_SESSION["cart_item"][$id]);
 		if(empty($_SESSION["cart_item"])){
+           
 			unset($_SESSION["cart_item"]);
 		}
 	}
 }
 }
 
+
 if(isset($_SESSION["cart_item"])){
+   
 ?>
 <table class='table-data' border=1px>
 	<tr>

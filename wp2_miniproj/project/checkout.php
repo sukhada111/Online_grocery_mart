@@ -14,8 +14,9 @@ $conn = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
 if(!$conn){
     die('Database Connection failed!');
 }
-foreach($_SESSION['cart_item'] as $item){
-	$sql="SELECT * FROM products WHERE id='$item'";
+foreach($_SESSION['cart_item'] as $x => $quant){
+
+	$sql="SELECT * FROM products WHERE id='$x'";
 	$result = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
   $record = mysqli_fetch_array($result);
 
